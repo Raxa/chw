@@ -19,16 +19,13 @@ Ext.define('mUserStories.model.upModel',{
     config:{
         fields:[{
             name:'id',
-            type:'number'
+            type:'number',
+            persist:false
         },
         {
-            name:'givenName',
-            mapping:'preferredName.givenName',
-            type:'string'
-        },{
-            name:'familyName',
-            mapping:'preferredName.familyName',
-            type:'string'
+            name:'names',
+            model: 'mUserStories.model.names'
+            
         },{
             name:'gender',
             type:'string'
@@ -36,9 +33,13 @@ Ext.define('mUserStories.model.upModel',{
             name:'birthdate',
             type:'date'
         },{
-            name:'cityVillage',
-            type:'string',
-            mapping:'preferredAddress.cityVillage'
+            name:'addresses',
+            model: 'mUserStories.model.addresses'
+            
+        },{
+            name:'uuid',
+            type:'number',
+            persist:false
         }]
     }
 })

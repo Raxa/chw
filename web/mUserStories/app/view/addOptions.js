@@ -64,6 +64,7 @@ Ext.define('mUserStories.view.addOptions',{
                     xtype:'textfield',
                     label:'ID',
                     name:'id_reg',
+                    id:'id_reg',
                     placeHolder:'314',
                     required:true,
                     clearIcon:true
@@ -71,6 +72,7 @@ Ext.define('mUserStories.view.addOptions',{
                     xtype:'textfield',
                     label:'First',
                     name:'first_reg',
+                    id:'first_reg',
                     placeHolder:'Harry',
                     required:true,
                     clearIcon:true
@@ -78,6 +80,7 @@ Ext.define('mUserStories.view.addOptions',{
                     xtype:'textfield',
                     label:'Last',
                     name:'last_reg',
+                    id:'last_reg',
                     placeHolder:'Potter',
                     required:true,
                     clearIcon:true
@@ -85,6 +88,7 @@ Ext.define('mUserStories.view.addOptions',{
                     xtype:'textfield',
                     label:'Phone',
                     name:'phone_reg',
+                    id:'phone_reg',
                     placeHolder:'1234567890',
                     required:true,
                     clearIcon:true
@@ -92,6 +96,7 @@ Ext.define('mUserStories.view.addOptions',{
                     xtype:'textfield',
                     label:'Village',
                     name:'village_reg',
+                    id:'village_reg',
                     placeHolder:'Village',
                     required:true,
                     clearIcon:true
@@ -105,7 +110,8 @@ Ext.define('mUserStories.view.addOptions',{
                     items : [{
                         xtype: 'radiofield',
                         name: 'radiogroup',
-                        value: 'female',
+                        id: 'radiogroup',
+                        value: 'Female',
                         label: 'Female',
                         labelWidth : '70%',
                         flex : 1,
@@ -113,7 +119,8 @@ Ext.define('mUserStories.view.addOptions',{
                     },{
                         xtype : 'radiofield',
                         name : 'radiogroup',
-                        value : 'male',
+                        id: 'radiogroup',
+                        value : 'Male',
                         label : 'Male',
                         labelWidth : '70%',
                         flex : 1
@@ -122,6 +129,7 @@ Ext.define('mUserStories.view.addOptions',{
                     xtype: 'datepickerfield',
                     destroyPickerOnHide: true,
                     name: 'bday',
+                    id: 'bday',
                     label: 'Birthday',
                     required: true,
                     value: new Date(),

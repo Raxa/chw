@@ -25,7 +25,7 @@ Ext.define('mUserStories.store.upStore',{
         proxy:{
             type: 'rest',
             //Hard-coding the host URL searching for patient name 'alok'
-            url: MRSHOST+'/ws/rest/v1/patient?q=john&v=full',
+            url: MRSHOST+'/ws/rest/v1/person',
             headers:{
                 "Authorization": "Basic " + window.btoa("admin" + ":" + "Hello123"),
                 "Accept": "application/json",
@@ -34,6 +34,9 @@ Ext.define('mUserStories.store.upStore',{
             reader: {
                 type: 'json',
                 rootProperty: 'results'
+            },
+            writer:{
+                type: 'json'
             }
         }
     }

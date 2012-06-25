@@ -14,32 +14,21 @@
  * the License.
  */
 
-Ext.define('mUserStories.model.upModel',{
+Ext.define('mUserStories.model.addresses',{
     extend:'Ext.data.Model',
     config:{
         fields:[{
-            name:'id',
-            type:'number',
-            persist:false
-        },
-        {
-            name:'names',
-            model: 'mUserStories.model.names'
-            
-        },{
-            name:'gender',
+            name:'cityVillage',
             type:'string'
-        },{
-            name:'birthdate',
-            type:'date'
-        },{
-            name:'addresses',
-            model: 'mUserStories.model.addresses'
             
-        },{
-            name:'uuid',
-            type:'number',
-            persist:false
-        }]
+        }
+//        ,{
+//            name: 'address1',
+//            type:'string'
+//        },{
+//            name: 'address2',
+//            type:'string'
+//        }
+    ]
     }
 })

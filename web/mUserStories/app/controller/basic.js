@@ -168,7 +168,7 @@ Ext.define('mUserStories.controller.basic',{
             USER=Ext.getCmp('username').getValue();
             var pass=Ext.getCmp('password').getValue();
             if(USER==''||pass==''){
-                Ext.Msg.alert("Error","Please fill in al fields")
+                Ext.Msg.alert("Error","Please fill in all fields")
             }else{
                 // clear form fields
                 Ext.getCmp('username').reset();
@@ -187,7 +187,33 @@ Ext.define('mUserStories.controller.basic',{
     doAdd:function(step,arg){
         if(arg){
             if(step==='register'){
-                // TODO: validate all fields
+                
+//                var id = Ext.getCmp('id_reg').getValue();
+                var fname = Ext.getCmp('first_reg').getValue();
+                var lname = Ext.getCmp('last_reg').getValue();
+                var phone = Ext.getCmp('phone_reg').getValue();
+                var village = Ext.getCmp('village_reg').getValue();
+                var gender = Ext.getCmp('radiogroup').getChecked()[0].getValue().charAt(0);
+                var bday = Ext.getCmp('bday').getValue();
+                if(fname=='' || lname=='' || phone=='' || village=='' || gender=='' || bday==''){
+                    Ext.Msg.alert("Error","Please fill in all fields")
+                }else{
+                    var up_store=Ext.create('mUserStories.store.upStore');
+                    var up_Model = Ext.create('mUserStories.model.upModel',{
+                        names:[{givenName:fname,
+                            familyName:lname}],
+                    gender:gender,
+                    birthdate:bday,
+                    addresses:[{cityVillage:village}]
+                    });
+                    
+                    up_store.add(up_Model);
+                    up_store.sync();
+                    
+                    up_store.on('write',function(){
+                        console.log('Stored locally');
+                    },this)
+                }
             }else if(step==='reminder'){
                 // TODO: validate all fields
                 // TODO: add 'other' option
