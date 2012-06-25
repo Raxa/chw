@@ -88,6 +88,30 @@ Ext.define('mUserStories.view.patientDetails',{
                     id:'bday_det'
                 }]
             }]
+        },{
+            xtype:'formpanel',
+            title:'Immunization',
+            items:[{
+                xtype:'fieldset',
+                title:'Immunization Records',
+                defaults:{
+                    labelWidth:'35%',
+                    disabled:true
+                },
+                items:[{
+                    xtype:'textfield',
+                    label:'First',
+                    id:'first_im'
+                },{
+                    xtype:'textfield',
+                    label:'Last',
+                    id:'last_im'
+                },{
+                    xtype:'textfield',
+                    label:'Immunizations',
+                    id:'info_im'
+                }]
+            }]
         }]
     }
 })

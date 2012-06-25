@@ -56,9 +56,9 @@ Ext.define('mUserStories.view.patientList',{
             itemTpl:[
                 '<div>{familyName}, {givenName}</div>'
             ],
-            //onItemDisclosure:true
             onItemDisclosure:function(record,btn,index){
-               this.getController().doDisclose(record,btn,index)
+               // TODO: navigate to details for specific patient and populate fields
+               // TODO: figure out how to put this function in controller
             }
         }]
     }

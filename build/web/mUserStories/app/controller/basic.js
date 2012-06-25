@@ -38,7 +38,6 @@ Ext.define('mUserStories.controller.basic',{
             down_add:'#down_add',
             logout_add:'#logout_add',
             back_add:'#back_add'
-            // patientlistid:'#patientlistid'
         },
         control:{
             ok_login:{
@@ -160,6 +159,7 @@ Ext.define('mUserStories.controller.basic',{
     doLogin:function(arg){
         if(arg){
             // TODO: check login credentials - where do we login?
+            // chw accounts on OpenMRS?
             // store items
             USER=Ext.getCmp('username').getValue();
             var pass=Ext.getCmp('password').getValue();
@@ -178,60 +178,8 @@ Ext.define('mUserStories.controller.basic',{
         }
     },   
 /* SCREEN FUNCTIONS */
-    // allow chw to check in
-    doLocation:function(arg){
-        if(arg){
-            // TODO: generate close locations based on USER
-            // TODO: check if location exists
-            // TODO: pass LOCATION
-            LOCATION=Ext.getCmp('location').getValue();
-            if(LOCATION==="otherlocation"){
-                Ext.Msg.prompt("","Please enter other location:",function(btn,text){
-                    if(btn==='ok'){
-                        LOCATION=text;
-                    }
-                })
-            }else if(LOCATION==='empty'){
-                Ext.Msg.alert("",'Please fill in the form')
-            }
-            // TODO: pass CURRDATE
-            // TODO: download all data into local storage
-            this.doDownload();
-            // continue to the next screen
-            Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
-        }else{
-            // exit the program
-            this.doExit();
-        }
-    },
-    doToolbar:function(screen,arg){
-        if(arg==='menu'){
-            Ext.getCmp('viewPort').setActiveItem(PAGES.ADD)
-        }else if(arg==='up'){
-            Ext.Msg.confirm('','Upload all information?',function(resp){
-                if(resp==='yes'){
-                    // TODO: doUpload information in localStorage
-                }
-            })
-        }else if(arg==='down'){
-            Ext.Msg.confirm('','Download all information?',function(resp){
-                if(resp==='yes'){
-                    // TODO: doDownload information in localStorage
-                }
-            })
-        }
-    },
-    // exit the program
-    doExit:function(){
-        // TODO: logout credentials
-        // return to login screen
-        Ext.getCmp('viewPort').setActiveItem(PAGES.LOGIN_SCREEN)
-    },
-    doBack:function(){
-        // TODO: Best logic for returning to previous page - doReturn()
-        // Hard coded in? Create a list of visited pages?
-        Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
-    },
+    // add registrations and reminders
+    // TODO: should we add more functionality? ex. place order for sample
     doAdd:function(step,arg){
         if(arg){
             if(step==='register'){
@@ -244,6 +192,62 @@ Ext.define('mUserStories.controller.basic',{
             // TODO: doReturn()
             Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
         }
+    },// deal with backbutton
+    doBack:function(){
+        // TODO: Best logic for returning to previous page - doReturn()
+        // Hard coded in? Create a list of visited pages?
+        Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
+    },// exit the program
+    doExit:function(){
+        // TODO: make sure all information is uploaded
+        // TODO: delete/save necessary information
+        // return to login screen
+        Ext.getCmp('viewPort').setActiveItem(PAGES.LOGIN_SCREEN)
+    },
+    // allow chw to check in
+    doLocation:function(arg){
+        if(arg){
+            // TODO: generate close locations based on USER
+            LOCATION=Ext.getCmp('location').getValue();
+            if(LOCATION==="otherlocation"){
+                Ext.Msg.prompt("","Please enter other location:",function(btn,text){
+                    if(btn==='ok'){
+                        LOCATION=text;
+                    }
+                })
+            }else if(LOCATION==='empty'){
+                Ext.Msg.alert("",'Please fill in the form')
+            }
+            // TODO: pass LOCATION to manager
+            // TODO: pass CURRDATE to manager
+            // download all data into local storage
+            this.doDownload();
+            // continue to the next screen
+            Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
+        }else{
+            // exit the program
+            this.doExit();
+        }
+    },
+    // manage navigation based on lower toolbar
+    doToolbar:function(screen,arg){
+        if(arg==='menu'){
+            Ext.getCmp('viewPort').setActiveItem(PAGES.ADD)
+        }else if(arg==='up'){
+            Ext.Msg.confirm('','Upload all information?',function(resp){
+                if(resp==='yes'){
+                    // TODO: doUpload information in localStorage
+                }
+            })
+        }else if(arg==='down'){
+            Ext.Msg.confirm('','Download all information?',function(resp){
+                if(resp==='yes'){
+                    // TODO: check for conflicts
+                    // doDownload information in localStorage
+                    this.doDownload();
+                }
+            })
+        }
     },
  /* HELPER FUNCTIONS */   
     doDownload:function(){
@@ -251,7 +255,4 @@ Ext.define('mUserStories.controller.basic',{
         down_store.load();
         Ext.getCmp('patientlistid').setStore(down_store);
     }
-    /*doDisclosure:function(record,btn,index){
-        Ext.Msg.alert('Tap','Disclose more info for '+record.get('givenName'))
-    }*/
 })

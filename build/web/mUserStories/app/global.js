@@ -14,7 +14,6 @@
  * the License.
  */
 
-//var HOST = 'http://motech.rcg.usm.maine.edu/motech-platform-server/'
 var HOST='http://174.129.222.130:8080/motech-platform-server/';
 var MRSHOST='http://raxaemr.jelastic.tsukaeru.net';
 var PAGES={
