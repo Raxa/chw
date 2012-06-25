@@ -35,7 +35,7 @@ Ext.define('mUserStories.view.confirmLocation',{
                 padding:'30px',
                 items:[{
                     xtype:'label',
-                    html:"Welcome, "+USER+"<br>"+"This is your check in for "+CURR_DATE
+                    id:'welcome_label'
                 }]
             },{
                 xtype:'fieldset',
