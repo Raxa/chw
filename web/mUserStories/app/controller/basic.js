@@ -37,7 +37,7 @@ Ext.define('mUserStories.controller.basic',{
             up_add:'#up_add',
             down_add:'#down_add',
             logout_add:'#logout_add',
-            back_add:'#back_add',
+            back_add:'#back_add'
             // patientlistid:'#patientlistid'
         },
         control:{
@@ -113,6 +113,22 @@ Ext.define('mUserStories.controller.basic',{
                 tap:function(){
                     this.doBack()
                 }
+            },ok_reg:{
+                tap:function(){
+                    this.doAdd('register',true)
+                }
+            },cancel_reg:{
+                tap:function(){
+                    this.doAdd('register',false)
+                }
+            },ok_rem:{
+                tap:function(){
+                    this.doAdd('reminder',true)
+                }
+            },cancel_rem:{
+                tap:function(){
+                    this.doAdd('reminder',false)
+                }
             }
         }
     },
@@ -139,6 +155,7 @@ Ext.define('mUserStories.controller.basic',{
             }]
         })
     },
+/* STARTUP FUNCTIONS */
     // login to the application
     doLogin:function(arg){
         if(arg){
@@ -159,7 +176,8 @@ Ext.define('mUserStories.controller.basic',{
             // exit the program
             this.doExit();
         }
-    },
+    },   
+/* SCREEN FUNCTIONS */
     // allow chw to check in
     doLocation:function(arg){
         if(arg){
@@ -210,16 +228,30 @@ Ext.define('mUserStories.controller.basic',{
         Ext.getCmp('viewPort').setActiveItem(PAGES.LOGIN_SCREEN)
     },
     doBack:function(){
-        // TODO: Best logic for returning to previous page:
+        // TODO: Best logic for returning to previous page - doReturn()
         // Hard coded in? Create a list of visited pages?
         Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
     },
+    doAdd:function(step,arg){
+        if(arg){
+            if(step==='register'){
+                // TODO: validate all fields
+            }else if(step==='reminder'){
+                // TODO: validate all fields
+                // TODO: add 'other' option
+            }
+        }else{
+            // TODO: doReturn()
+            Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
+        }
+    },
+ /* HELPER FUNCTIONS */   
     doDownload:function(){
         var down_store=Ext.create('mUserStories.store.downStore');
         down_store.load();
         Ext.getCmp('patientlistid').setStore(down_store);
-    },
-    doDisclosure:function(record,btn,index){
-        Ext.Msg.alert('Tap','Disclose more info for '+record.get('givenName'))
     }
+    /*doDisclosure:function(record,btn,index){
+        Ext.Msg.alert('Tap','Disclose more info for '+record.get('givenName'))
+    }*/
 })

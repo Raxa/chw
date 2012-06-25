@@ -158,6 +158,94 @@ Ext.define('mUserStories.view.addOptions',{
                     }]
                 }]
             }]
+        },{
+            xtype:'formpanel',
+            title:'Reminder',
+            items:[{
+                xtype:'fieldset',
+                defaults:{
+                    labelWidth:'35%'
+                },
+                items:[{
+                    xtype:'textfield',
+                    label:'ID',
+                    name:'id_rem',
+                    placeholder:'314',
+                    clearIcon:true,
+                    required:true
+                },{
+                    xtype:'textfield',
+                    label:'First',
+                    name:'first_rem',
+                    placeholder:'Harry',
+                    clearIcon:true,
+                    required:true
+                },{
+                    xtype:'textfield',
+                    label:'Last',
+                    name:'last_rem',
+                    placeholder:'Last',
+                    clearIcon:true,
+                    required:true
+                },{
+                    xtype:'selectfield',
+                    label:'Type',
+                    id:'type_rem',
+                    flex:2,
+                    required:true,
+                    options:[{
+                        text:'',
+                        value:'empty'
+                    },{
+                        text:'Reminder #1',
+                        value:'reminder1'
+                    },{
+                        text:'Reminder #2',
+                        value:'reminder2'
+                    },{
+                        text:'Reminder #3',
+                        value:'reminder3'
+                    },{
+                        text:'Other',
+                        value:'otherreminder'
+                    }]
+                },{
+                    xtype: 'container',
+                    layout: {
+                        type: 'vbox',
+                        pack: 'center',
+                        align: 'middle'
+                    },
+                    items: [{
+                        xtype: 'container',
+                        layout: 'hbox',
+                        padding: '10px',
+                        width: "100%",
+                        items: [{
+                            xtype: 'label',
+                            flex: '3'
+                        },{
+                            xtype: 'button',
+                            text: 'Okay',
+                            id: 'ok_rem',
+                            flex: '3',
+                            ui:'confirm-round'
+                        },{
+                            xtype: 'label',
+                            flex: '1'
+                        },{
+                            xtype: 'button',
+                            text: 'Cancel',
+                            id: 'cancel_rem',
+                            flex: '3',
+                            ui:'decline-round'
+                        },{
+                            xtype: 'label',
+                            flex: '3'
+                        }]
+                    }]
+                }]
+            }]
         }]
     }
 })
