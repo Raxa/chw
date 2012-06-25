@@ -15,7 +15,7 @@
  */
 
 var HOST='http://174.129.222.130:8080/motech-platform-server/';
-var MRSHOST='http://raxaemr.jelastic.tsukaeru.net';
+var MRSHOST='http://raxajss.jelastic.servint.net';
 var PAGES={
     LOGIN_SCREEN:0,
     CONFIRM_LOC:1,
