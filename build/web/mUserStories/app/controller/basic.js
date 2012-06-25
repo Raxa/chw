@@ -167,9 +167,10 @@ Ext.define('mUserStories.controller.basic',{
             // store items
             USER=Ext.getCmp('username').getValue();
             var pass=Ext.getCmp('password').getValue();
-            if(USER==''||pass==''){
+            if(USER===''||pass===''){
                 Ext.Msg.alert("Error","Please fill in al fields")
             }else{
+                Ext.getCmp('welcome_label').setHtml("Welcome, "+USER+"<br>"+"This is your check in for "+CURR_DATE)
                 // clear form fields
                 Ext.getCmp('username').reset();
                 Ext.getCmp('password').reset();
@@ -205,6 +206,7 @@ Ext.define('mUserStories.controller.basic',{
     doExit:function(){
         // TODO: make sure all information is uploaded
         // TODO: delete/save necessary information
+        Ext.getCmp('location').reset();
         // return to login screen
         Ext.getCmp('viewPort').setActiveItem(PAGES.LOGIN_SCREEN)
     },
