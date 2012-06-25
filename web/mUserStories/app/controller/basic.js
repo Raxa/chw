@@ -20,24 +20,28 @@ Ext.define('mUserStories.controller.basic',{
     views:['loginScreen','confirmLocation','patientList','patientDetails'],
     config:{
         refs:{
-            ok_login:'#ok_login',
-            cancel_login:'#cancel_login',
-            ok_loc:'#ok_loc',
             cancel_loc:'#cancel_loc',
-            menu_list:'#menu_list',
-            up_list:'#up_list',
-            down_list:'#down_list',
-            logout_list:'#logout_list',
-            menu_det:'#menu_det',
-            up_det:'#up_det',
-            down_det:'#down_det',
-            logout_det:'#logout_det',
+            cancel_login:'#cancel_login',
+            cancel_reg:'#cancel_reg',
+            cancel_rem:'#cancel_rem',
+            back_add:'#back_add',
             back_det:'#back_det',
-            menu_add:'#menu_add',
-            up_add:'#up_add',
             down_add:'#down_add',
+            down_det:'#down_det',
+            down_list:'#down_list',
             logout_add:'#logout_add',
-            back_add:'#back_add'
+            logout_det:'#logout_det',
+            logout_list:'#logout_list',
+            menu_add:'#menu_add',
+            menu_det:'#menu_det',
+            menu_list:'#menu_list',
+            ok_loc:'#ok_loc',
+            ok_login:'#ok_login',
+            ok_reg:"#ok_reg",
+            ok_rem:'#ok_rem',
+            up_add:'#up_add',
+            up_det:'#up_det',
+            up_list:'#up_list'
         },
         control:{
             ok_login:{
@@ -209,21 +213,24 @@ Ext.define('mUserStories.controller.basic',{
         if(arg){
             // TODO: generate close locations based on USER
             LOCATION=Ext.getCmp('location').getValue();
-            if(LOCATION==="otherlocation"){
-                Ext.Msg.prompt("","Please enter other location:",function(btn,text){
-                    if(btn==='ok'){
-                        LOCATION=text;
-                    }
-                })
-            }else if(LOCATION==='empty'){
+            if (LOCATION==='empty'){
                 Ext.Msg.alert("",'Please fill in the form')
+            }else{
+                if(LOCATION==="otherlocation"){
+                    Ext.Msg.prompt("","Please enter other location:",function(btn,text){
+                        if(btn==='ok'){
+                            LOCATION=text;
+                        }
+                    })
+                }
+                // TODO: pass LOCATION to manager
+                // TODO: pass CURRDATE to manager
+                // download all data into local storage
+                this.doDownload();
+                // continue to the next screen
+                Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
             }
-            // TODO: pass LOCATION to manager
-            // TODO: pass CURRDATE to manager
-            // download all data into local storage
-            this.doDownload();
-            // continue to the next screen
-            Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
+            
         }else{
             // exit the program
             this.doExit();
