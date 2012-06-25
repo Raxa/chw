@@ -57,7 +57,14 @@ Ext.define('mUserStories.view.patientList',{
                 '<div>{familyName}, {givenName}</div>'
             ],
             onItemDisclosure:function(record,btn,index){
-               // TODO: navigate to details for specific patient and populate fields
+               // navigate to details for specific patient and populate fields
+               Ext.getCmp('first_det').setValue(record.get('givenName'));
+               Ext.getCmp('last_det').setValue(record.get('familyName'));
+               Ext.getCmp('address_det').setValue(record.get('cittyVillage'));
+               Ext.getCmp('gender_det').setValue(record.get('gender'));
+               Ext.getCmp('bday_det').setValue(record.get('birthdate'))
+               // change to next page
+               Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_DET)
                // TODO: figure out how to put this function in controller
             }
         }]

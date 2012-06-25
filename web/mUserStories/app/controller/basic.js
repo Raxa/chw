@@ -237,6 +237,7 @@ Ext.define('mUserStories.controller.basic',{
             Ext.Msg.confirm('','Upload all information?',function(resp){
                 if(resp==='yes'){
                     // TODO: doUpload information in localStorage
+                    this.doUpload();
                 }
             })
         }else if(arg==='down'){
@@ -254,5 +255,8 @@ Ext.define('mUserStories.controller.basic',{
         var down_store=Ext.create('mUserStories.store.downStore');
         down_store.load();
         Ext.getCmp('patientlistid').setStore(down_store);
+    },
+    doUpload:function(){
+        
     }
 })
