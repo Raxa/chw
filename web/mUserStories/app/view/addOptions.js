@@ -89,6 +89,13 @@ Ext.define('mUserStories.view.addOptions',{
                     required:true,
                     clearIcon:true
                 },{
+                    xtype:'textfield',
+                    label:'Village',
+                    name:'village_reg',
+                    placeHolder:'Village',
+                    required:true,
+                    clearIcon:true
+                },{
                     xtype : 'container',
                     layout : {
                         type : 'hbox',
