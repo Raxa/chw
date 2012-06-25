@@ -225,8 +225,7 @@ Ext.define('mUserStories.controller.basic',{
                         }
                     })
                 }
-                // TODO: pass LOCATION to manager
-                // TODO: pass CURRDATE to manager
+                // TODO: pass LOCATION & CURR_DATE to manager
                 // download all data into local storage
                 this.doDownload();
                 // continue to the next screen
@@ -245,7 +244,7 @@ Ext.define('mUserStories.controller.basic',{
         }else if(arg==='up'){
             Ext.Msg.confirm('','Upload all information?',function(resp){
                 if(resp==='yes'){
-                    // TODO: doUpload information in localStorage
+                    // upload information in localStorage
                     this.doUpload();
                 }
             })
@@ -266,6 +265,6 @@ Ext.define('mUserStories.controller.basic',{
         Ext.getCmp('patientlistid').setStore(down_store);
     },
     doUpload:function(){
-        
+        // TODO: upload all information in localStorage
     }
 })

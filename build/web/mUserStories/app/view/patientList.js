@@ -50,7 +50,7 @@ Ext.define('mUserStories.view.patientList',{
             grouped:true,
             pinHeaders:false,
             id:'patientlistid',
-            width:Ext.os.deviceType=='Phone'?null:'50%',
+            width:Ext.os.deviceType=='Phone'?null:'80%',
             height:Ext.os.deviceType=='Phone'?null:'100%',
             centered:true,
             itemTpl:[
