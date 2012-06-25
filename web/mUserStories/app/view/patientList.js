@@ -59,6 +59,7 @@ Ext.define('mUserStories.view.patientList',{
             onItemDisclosure:function(record,btn,index){
                // TODO: navigate to details for specific patient and populate fields
                // TODO: figure out how to put this function in controller
+               Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_DET)
             }
         }]
     }
