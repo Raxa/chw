@@ -60,7 +60,7 @@ Ext.define('mUserStories.view.patientList',{
                // navigate to details for specific patient and populate fields
                Ext.getCmp('first_det').setValue(record.get('givenName'));
                Ext.getCmp('last_det').setValue(record.get('familyName'));
-               Ext.getCmp('address_det').setValue(record.get('cittyVillage'));
+               Ext.getCmp('address_det').setValue(record.get('cityVillage'));
                Ext.getCmp('gender_det').setValue(record.get('gender'));
                Ext.getCmp('bday_det').setValue(record.get('birthdate'))
                // change to next page
