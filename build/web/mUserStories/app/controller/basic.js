@@ -167,13 +167,10 @@ Ext.define('mUserStories.controller.basic',{
             // store items
             USER=Ext.getCmp('username').getValue();
             var pass=Ext.getCmp('password').getValue();
-<<<<<<< HEAD
+
             if(USER==''||pass==''){
                 Ext.Msg.alert("Error","Please fill in all fields")
-=======
-            if(USER===''||pass===''){
-                Ext.Msg.alert("Error","Please fill in al fields")
->>>>>>> 5f541d14411eeb68b3d4117f9fe5dff942fb52c3
+
             }else{
                 Ext.getCmp('welcome_label').setHtml("Welcome, "+USER+"<br>"+"This is your check in for "+CURR_DATE)
                 // clear form fields
