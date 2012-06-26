@@ -253,74 +253,6 @@ Ext.define('mUserStories.controller.basic',{
             Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
         }
     },
-    
-    /* this funtions makes a get call to get the patient identifiers type */
-    getidentifierstype: function (personUuid) {
-        var identifiers = Ext.create('mUserStories.store.identifiersType')
-        identifiers.load();
-        console.log('Identifiers loaded');
-        // this statement calls getlocation() as soon as the get call is successful
-        identifiers.on('load', function () {
-            console.log('Getting location');
-            this.getlocation(personUuid, identifiers.getAt(0).getData().uuid)
-        }, this);
-    },
-    
-    /* this funtions makes a get call to get the location uuid */
-    getlocation: function (personUuid, identifierType) {
-        var locations = Ext.create('mUserStories.store.location')
-        locations.load();
-        console.log('locations loaded');
-        // this statement calls makePatient() as soon as the get call is successful
-        locations.on('load', function () {
-            console.log('Sending request to create patient');
-            this.makePatient(personUuid, identifierType, locations.getAt(0).getData().uuid)
-        }, this)
-    },
-    
-    /* this funtions makes a post call to creat the patient with three parameter which will sent as person, identifiertype 
-       and loaction */
-    makePatient: function (personUuid, identifierType, location) {
-        var patient = Ext.create('mUserStories.model.upPatientModel', {
-            person: personUuid,
-            identifiers: [{
-                identifier: this.getPatientIdentifier().toString(),
-                identifierType: identifierType,
-                location: location,
-                preferred: true
-            }]
-        });
-        
-        var PatientStore = Ext.create('mUserStories.store.upPatientStore')
-        PatientStore.add(patient);
-        //makes the post call for creating the patient
-        PatientStore.sync();
-        PatientStore.on('write',function(){
-            console.log('------Patient Created successfully------');
-        },this)
-        
-        
-    },
-    
-    getPatientIdentifier : function(){
-        //dummy funtion to be used for creating partient
-        // TODO: writen a  ramdom no for patient identufier but it should be a unique id
-        return Math.floor(Math.random() * 1000000000);
-    },
-    
-    // deal with backbutton
-    doBack:function(){
-        // TODO: Best logic for returning to previous page - doReturn()
-        // Hard coded in? Create a list of visited pages?
-        Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
-    },// exit the program
-    doExit:function(){
-        // TODO: make sure all information is uploaded
-        // TODO: delete/save necessary information
-        Ext.getCmp('location').reset();
-        // return to login screen
-        Ext.getCmp('viewPort').setActiveItem(PAGES.LOGIN_SCREEN)
-    },
     // allow chw to check in
     doLocation:function(arg){
         if(arg){
@@ -342,7 +274,6 @@ Ext.define('mUserStories.controller.basic',{
                 // continue to the next screen
                 Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
             }
-            
         }else{
             // exit the program
             this.doExit();
@@ -370,6 +301,12 @@ Ext.define('mUserStories.controller.basic',{
         }
     },
     /* HELPER FUNCTIONS */   
+    // deal with backbutton
+    doBack:function(){
+        // TODO: Best logic for returning to previous page - doReturn()
+        // Hard coded in? Create a list of visited pages?
+        Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
+    },
     doDownload:function(){
         var down_store=Ext.create('mUserStories.store.downStore');
         down_store.load();
@@ -377,7 +314,63 @@ Ext.define('mUserStories.controller.basic',{
         // TODO: set patientcurrid to be subset of above organized by appt time
             // Do we need a separate store for this?
     },
+    // exit the program
+    doExit:function(){
+        // TODO: make sure all information is uploaded
+        // TODO: delete/save necessary information
+        Ext.getCmp('location').reset();
+        // return to login screen
+        Ext.getCmp('viewPort').setActiveItem(PAGES.LOGIN_SCREEN)
+    },
     doUpload:function(){
     // TODO: upload all information in localStorage
+    },
+    /* this funtions makes a get call to get the patient identifiers type */
+    getidentifierstype: function (personUuid) {
+        var identifiers = Ext.create('mUserStories.store.identifiersType')
+        identifiers.load();
+        console.log('Identifiers loaded');
+        // this statement calls getlocation() as soon as the get call is successful
+        identifiers.on('load', function () {
+            console.log('Getting location');
+            this.getlocation(personUuid, identifiers.getAt(0).getData().uuid)
+        }, this);
+    },
+    /* this funtions makes a get call to get the location uuid */
+    getlocation: function (personUuid, identifierType) {
+        var locations = Ext.create('mUserStories.store.location')
+        locations.load();
+        console.log('locations loaded');
+        // this statement calls makePatient() as soon as the get call is successful
+        locations.on('load', function () {
+            console.log('Sending request to create patient');
+            this.makePatient(personUuid, identifierType, locations.getAt(0).getData().uuid)
+        }, this)
+    },
+    getPatientIdentifier : function(){
+        //dummy funtion to be used for creating partient
+        // TODO: writen a  ramdom no for patient identufier but it should be a unique id
+        return Math.floor(Math.random() * 1000000000);
+    },
+    /* this funtions makes a post call to creat the patient with three parameter which will sent as person, identifiertype 
+       and loaction */
+    makePatient: function (personUuid, identifierType, location) {
+        var patient = Ext.create('mUserStories.model.upPatientModel', {
+            person: personUuid,
+            identifiers: [{
+                identifier: this.getPatientIdentifier().toString(),
+                identifierType: identifierType,
+                location: location,
+                preferred: true
+            }]
+        });
+        
+        var PatientStore = Ext.create('mUserStories.store.upPatientStore')
+        PatientStore.add(patient);
+        //makes the post call for creating the patient
+        PatientStore.sync();
+        PatientStore.on('write',function(){
+            console.log('------Patient Created successfully------');
+        },this) 
     }
 })

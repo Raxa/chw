@@ -65,6 +65,10 @@ Ext.define('mUserStories.view.patientDetails',{
                 },
                 items:[{
                     xtype:'textfield',
+                    label:'Patient ID',
+                    id:'id_det'
+                },{
+                    xtype:'textfield',
                     label:'First',
                     id:'first_det'
                 },{
@@ -105,35 +109,7 @@ Ext.define('mUserStories.view.patientDetails',{
                     label:'Symptom Description',
                     id:'info_vis',
                     placeHolder:'Has had diarrhea for more than 2 days'
-                },/*{
-                    xtype:'textfield',
-                    disabled:true,
-                    label:'Suggested Tasks',
-                    // TODO: make this a checklist
-                    id:'task_vis'
-                },{
-                    xtype:'container',
-                    title:'Suggested Tasks',
-                    id:'task_vis',
-                    layout:{
-                        type:'vbox',
-                        align:'stretch',
-                        padding:0
-                    },
-                    items:[{
-                        xtype:'checkboxfield',
-                        name:'task1',
-                        label:'Task #1'
-                    },{
-                        xtype:'checkboxfield',
-                        name:'task2',
-                        label:'Task #2'
-                    },{
-                        xtype:'checkboxfield',
-                        name:'task3',
-                        label:'Task #3'
-                    }]
-                }*/]
+                }]
             },{ // maybe this should be a list not checklist?
                 // how much detail is necessary?
                 xtype:'fieldset',
@@ -165,36 +141,42 @@ Ext.define('mUserStories.view.patientDetails',{
             }]
         },{
             xtype:'formpanel',
-            title:'Immunization',
+            title:'Records',
             items:[{
                 xtype:'fieldset',
                 title:'Immunization Records',
                 defaults:{
-                    labelWidth:'35%',
-                    disabled:true,
-                    labelAlign:'top'
+                    labelWidth:'80%'
                 },
                 items:[{
-                    xtype:'textfield',
-                    label:'Immunizations',
-                    id:'info_im'
+                    xtype:'checkboxfield',
+                    name:'im1',
+                    label:'Typhoid',
+                    checked:true
+                },{
+                    xtype:'checkboxfield',
+                    name:'im2',
+                    label:'Hep A',
+                    checked:true
+                },{
+                    xtype:'checkboxfield',
+                    name:'im3',
+                    label:'Polio'
                 }]
-            }]
-        },{
-            xtype:'formpanel',
-            title:'Other',
-            items:[{
+            },{
                 xtype:'fieldset',
                 title:'Other Records',
                 defaults:{
-                    labelWidth:'35%',
-                    disabled:true,
-                    labelAlign:'top'
+                    labelWidth:'80%'
                 },
                 items:[{
-                    xtype:'textfield',
-                    label:'Background',
-                    id:'info_other'
+                    xtype:'checkboxfield',
+                    name:'other1',
+                    label:'Vitamin A'
+                },{
+                    xtype:'checkboxfield',
+                    name:'other2',
+                    label:'Albendazole'
                 }]
             }]
         },{

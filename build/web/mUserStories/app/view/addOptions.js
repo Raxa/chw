@@ -63,14 +63,6 @@ Ext.define('mUserStories.view.addOptions',{
                 },
                 items:[{
                     xtype:'textfield',
-                    label:'ID',
-                    name:'id_reg',
-                    id:'id_reg',
-                    placeHolder:'314',
-                    required:true,
-                    clearIcon:true
-                },{
-                    xtype:'textfield',
                     label:'First',
                     name:'first_reg',
                     id:'first_reg',
@@ -184,21 +176,21 @@ Ext.define('mUserStories.view.addOptions',{
                     xtype:'textfield',
                     label:'ID',
                     name:'id_rem',
-                    placeholder:'314',
+                    placeHolder:'314',
                     clearIcon:true,
                     required:true
                 },{
                     xtype:'textfield',
                     label:'First',
                     name:'first_rem',
-                    placeholder:'Harry',
+                    placeHolder:'Harry',
                     clearIcon:true,
                     required:true
                 },{
                     xtype:'textfield',
                     label:'Last',
                     name:'last_rem',
-                    placeholder:'Last',
+                    placeHolder:'Last',
                     clearIcon:true,
                     required:true
                 },{
@@ -258,6 +250,48 @@ Ext.define('mUserStories.view.addOptions',{
                             flex: '3'
                         }]
                     }]
+                }]
+            }]
+        },{
+            xtype:'formpanel',
+            title:'Appointment',
+            items:[{
+                xtype:'fieldset',
+                defaults:{
+                    labelWidth:'35%'
+                },
+                items:[{
+                    xtype:'textfield',
+                    label:'ID',
+                    name:'id_app',
+                    placeHolder:'314',
+                    clearIcon:true,
+                    required:true
+                },{
+                    xtype:'textfield',
+                    label:'First',
+                    name:'first_app',
+                    placeHolder:'Harry',
+                    clearIcon:true,
+                    required:true
+                },{
+                    xtype:'textfield',
+                    label:'Last',
+                    name:'last_app',
+                    placeHolder:'Last',
+                    clearIcon:true,
+                    required:true
+                },{
+                    xtype: 'datepickerfield',
+                    destroyPickerOnHide: true,
+                    name: 'date_app',
+                    id: 'date_app',
+                    label: 'Date',
+                    required: true,
+                    value: new Date(),
+                    picker: {
+                        yearFrom: 1900
+                    }
                 }]
             }]
         }]
