@@ -102,6 +102,7 @@ Ext.define('mUserStories.view.addOptions',{
                     clearIcon:true
                 },{
                     xtype : 'container',
+                    id:'gender_cont',
                     layout : {
                         type : 'hbox',
                         align: 'stretch',
@@ -110,22 +111,40 @@ Ext.define('mUserStories.view.addOptions',{
                     items : [{
                         xtype: 'radiofield',
                         name: 'radiogroup',
-                        id: 'radiogroup',
-                        value: 'Female',
+                        value: 'female',
                         label: 'Female',
                         labelWidth : '70%',
                         flex : 1,
-                        height : 50
+                        id:'radio_f'
                     },{
                         xtype : 'radiofield',
                         name : 'radiogroup',
-                        id: 'radiogroup',
-                        value : 'Male',
+                        value : 'male',
                         label : 'Male',
                         labelWidth : '70%',
-                        flex : 1
+                        flex : 1,
+                        id:'radio_m'
                     }]
-                },{
+                },/*{
+                        xtype:'fieldconatiner',
+                        fieldLabel:'Gender',
+                        defaultType:'radiofield',
+                        defaults:{
+                            flex:1
+                        },
+                        layout:'hbox',
+                        items:[{
+                            boxLabel:'F',
+                            name:'gender_reg',
+                            inputValue:'f',
+                            id:'radio_f'
+                        },{
+                            boxLabel:'M',
+                            name:'gender_reg',
+                            inputValue:'m',
+                            id:'radio_m'
+                        }]
+                },*/{
                     xtype: 'datepickerfield',
                     destroyPickerOnHide: true,
                     name: 'bday',
