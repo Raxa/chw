@@ -25,7 +25,7 @@ Ext.define('mUserStories.store.downStore',{
         proxy:{
             type: 'rest',
             //Hard-coding the host URL searching for patient name 'alok'
-            url: MRSHOST+'/ws/rest/v1/patient?q=john&v=full',
+            url: MRSHOST+'/ws/rest/v1/patient?q=harry&v=full',
             headers:{
                 "Authorization": "Basic " + window.btoa("admin" + ":" + "Hello123"),
                 "Accept": "application/json",

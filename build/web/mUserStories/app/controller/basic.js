@@ -48,87 +48,108 @@ Ext.define('mUserStories.controller.basic',{
                 tap:function(){
                     this.doLogin(true)
                 }
-            },cancel_login:{
+            },
+            cancel_login:{
                 tap:function(){
                     this.doLogin(false)
                 }
-            },ok_loc:{
+            },
+            ok_loc:{
                 tap:function(){
                     this.doLocation(true)
                 }
-            },cancel_loc:{
+            },
+            cancel_loc:{
                 tap:function(){
                     this.doLocation(false)
                 }
-            },menu_list:{
+            },
+            menu_list:{
                 tap:function(){
                     this.doToolbar('list','menu')
                 }
-            },up_list:{
+            },
+            up_list:{
                 tap:function(){
                     this.doToolbar('list','up')
                 }
-            },down_list:{
+            },
+            down_list:{
                 tap:function(){
                     this.doToolbar('list','down')
                 }
-            },logout_list:{
+            },
+            logout_list:{
                 tap:function(){
                     this.doExit()
                 }
-            },menu_det:{
+            },
+            menu_det:{
                 tap:function(){
                     this.doToolbar('details','menu')
                 }
-            },up_det:{
+            },
+            up_det:{
                 tap:function(){
                     this.doToolbar('details','up')
                 }
-            },down_det:{
+            },
+            down_det:{
                 tap:function(){
                     this.doToolbar('details','down')
                 }
-            },logout_det:{
+            },
+            logout_det:{
                 tap:function(){
                     this.doExit()
                 }
-            },back_det:{
+            },
+            back_det:{
                 tap:function(){
                     this.doBack()
                 }
-            },menu_add:{
+            },
+            menu_add:{
                 tap:function(){
                     this.doToolbar('add','menu')
                 }
-            },up_add:{
+            },
+            up_add:{
                 tap:function(){
                     this.doToolbar('add','up')
                 }
-            },down_add:{
+            },
+            down_add:{
                 tap:function(){
                     this.doToolbar('add','down')
                 }
-            },logout_add:{
+            },
+            logout_add:{
                 tap:function(){
                     this.doExit()
                 }
-            },back_add:{
+            },
+            back_add:{
                 tap:function(){
                     this.doBack()
                 }
-            },ok_reg:{
+            },
+            ok_reg:{
                 tap:function(){
                     this.doAdd('register',true)
                 }
-            },cancel_reg:{
+            },
+            cancel_reg:{
                 tap:function(){
                     this.doAdd('register',false)
                 }
-            },ok_rem:{
+            },
+            ok_rem:{
                 tap:function(){
                     this.doAdd('reminder',true)
                 }
-            },cancel_rem:{
+            },
+            cancel_rem:{
                 tap:function(){
                     this.doAdd('reminder',false)
                 }
@@ -158,7 +179,7 @@ Ext.define('mUserStories.controller.basic',{
             }]
         })
     },
-/* STARTUP FUNCTIONS */
+    /* STARTUP FUNCTIONS */
     // login to the application
     doLogin:function(arg){
         if(arg){
@@ -182,14 +203,14 @@ Ext.define('mUserStories.controller.basic',{
             this.doExit();
         }
     },   
-/* SCREEN FUNCTIONS */
+    /* SCREEN FUNCTIONS */
     // add registrations and reminders
     // TODO: should we add more functionality? ex. place order for sample
     doAdd:function(step,arg){
         if(arg){
             if(step==='register'){
                 
-//                var id = Ext.getCmp('id_reg').getValue();
+                //                var id = Ext.getCmp('id_reg').getValue();
                 var fname = Ext.getCmp('first_reg').getValue();
                 var lname = Ext.getCmp('last_reg').getValue();
                 var phone = Ext.getCmp('phone_reg').getValue();
@@ -208,31 +229,94 @@ Ext.define('mUserStories.controller.basic',{
                 if(fname=='' || lname=='' || phone=='' || village=='' || gender=='' || bday==''){
                     Ext.Msg.alert("Error","Please fill in all fields")
                 }else{
-                    var up_store=Ext.create('mUserStories.store.upStore');
-                    var up_Model = Ext.create('mUserStories.model.upModel',{
-                        names:[{givenName:fname,
-                            familyName:lname}],
-                    gender:gender,
-                    birthdate:bday,
-                    addresses:[{cityVillage:village}]
+                    var up_store=Ext.create('mUserStories.store.upPersonStore');
+                    var up_Model = Ext.create('mUserStories.model.upPersonModel',{
+                        names:[{
+                            givenName:fname,
+                            familyName:lname
+                        }],
+                        gender:gender,
+                        birthdate:bday,
+                        addresses:[{
+                            cityVillage:village
+                        }]
                     });
                     
                     up_store.add(up_Model);
                     up_store.sync();
                     
                     up_store.on('write',function(){
-                        console.log('Stored locally');
+                        console.log('Stored locally, calling identifier type');
+                        // Create request for patient here
+                        
+                        this.getidentifierstype(up_store.getAt(0).getData().uuid)
                     },this)
                 }
             }else if(step==='reminder'){
-                // TODO: validate all fields
-                // TODO: add 'other' option
+            // TODO: validate all fields
+            // TODO: add 'other' option
             }
         }else{
             // TODO: doReturn()
             Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
         }
-    },// deal with backbutton
+    },
+    
+    /* this funtions makes a get call to get the patient identifiers type */
+    getidentifierstype: function (personUuid) {
+        var identifiers = Ext.create('mUserStories.store.identifiersType')
+        identifiers.load();
+        console.log('Identifiers loaded');
+        // this statement calls getlocation() as soon as the get call is successful
+        identifiers.on('load', function () {
+            console.log('Getting location');
+            this.getlocation(personUuid, identifiers.getAt(0).getData().uuid)
+        }, this);
+    },
+    
+    /* this funtions makes a get call to get the location uuid */
+    getlocation: function (personUuid, identifierType) {
+        var locations = Ext.create('mUserStories.store.location')
+        locations.load();
+        console.log('locations loaded');
+        // this statement calls makePatient() as soon as the get call is successful
+        locations.on('load', function () {
+            console.log('Sending request to create patient');
+            this.makePatient(personUuid, identifierType, locations.getAt(0).getData().uuid)
+        }, this)
+    },
+    
+    /* this funtions makes a post call to creat the patient with three parameter which will sent as person, identifiertype 
+       and loaction */
+    makePatient: function (personUuid, identifierType, location) {
+        var patient = Ext.create('mUserStories.model.upPatientModel', {
+            person: personUuid,
+            identifiers: [{
+                identifier: this.getPatientIdentifier().toString(),
+                identifierType: identifierType,
+                location: location,
+                preferred: true
+            }]
+        });
+        
+        var PatientStore = Ext.create('mUserStories.store.upPatientStore')
+        PatientStore.add(patient);
+        //makes the post call for creating the patient
+        PatientStore.sync();
+        PatientStore.on('write',function(){
+            console.log('------Patient Created successfully------');
+        },this)
+        
+        
+    },
+    
+    getPatientIdentifier : function(){
+        //dummy funtion to be used for creating partient
+        // TODO: writen a  ramdom no for patient identufier but it should be a unique id
+        return Math.floor(Math.random() * 1000000000);
+    },
+    
+    // deal with backbutton
     doBack:function(){
         // TODO: Best logic for returning to previous page - doReturn()
         // Hard coded in? Create a list of visited pages?
@@ -293,7 +377,7 @@ Ext.define('mUserStories.controller.basic',{
             })
         }
     },
- /* HELPER FUNCTIONS */   
+    /* HELPER FUNCTIONS */   
     doDownload:function(){
         var down_store=Ext.create('mUserStories.store.downStore');
         down_store.load();
@@ -302,6 +386,6 @@ Ext.define('mUserStories.controller.basic',{
             // Do we need a separate store for this?
     },
     doUpload:function(){
-        // TODO: upload all information in localStorage
+    // TODO: upload all information in localStorage
     }
 })
