@@ -77,7 +77,7 @@ Ext.define('mUserStories.view.confirmLocation',{
                     width: "100%",
                     items: [{
                         xtype: 'label',
-                        flex: '3'
+                        flex: '2'
                     },{
                         xtype: 'button',
                         text: 'Okay',
@@ -95,7 +95,7 @@ Ext.define('mUserStories.view.confirmLocation',{
                         ui:'decline-round'
                     },{
                         xtype: 'label',
-                        flex: '3'
+                        flex: '2'
                     }]
                 }]
             }]

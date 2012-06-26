@@ -298,6 +298,8 @@ Ext.define('mUserStories.controller.basic',{
         var down_store=Ext.create('mUserStories.store.downStore');
         down_store.load();
         Ext.getCmp('patientlistid').setStore(down_store);
+        // TODO: set patientcurrid to be subset of above organized by appt time
+            // Do we need a separate store for this?
     },
     doUpload:function(){
         // TODO: upload all information in localStorage

@@ -21,6 +21,7 @@ Ext.define('mUserStories.view.patientDetails',{
         items:[{
             xtype:'titlebar',
             docked:'top',
+            id:'title_det',
             title:'Mobile User Stories',
             items:[{
                 xtype:'button',
@@ -90,26 +91,127 @@ Ext.define('mUserStories.view.patientDetails',{
             }]
         },{
             xtype:'formpanel',
+            title:'Visit',
+            items:[{
+                xtype:'fieldset',
+                title:'Visit Details',
+                defaults:{
+                    labelWidth:'35%',
+                    labelAlign:'top'
+                },
+                items:[{
+                    xtype:'textfield',
+                    disabled:true,
+                    label:'Symptom Description',
+                    id:'info_vis',
+                    placeHolder:'Has had diarrhea for more than 2 days'
+                },/*{
+                    xtype:'textfield',
+                    disabled:true,
+                    label:'Suggested Tasks',
+                    // TODO: make this a checklist
+                    id:'task_vis'
+                },{
+                    xtype:'container',
+                    title:'Suggested Tasks',
+                    id:'task_vis',
+                    layout:{
+                        type:'vbox',
+                        align:'stretch',
+                        padding:0
+                    },
+                    items:[{
+                        xtype:'checkboxfield',
+                        name:'task1',
+                        label:'Task #1'
+                    },{
+                        xtype:'checkboxfield',
+                        name:'task2',
+                        label:'Task #2'
+                    },{
+                        xtype:'checkboxfield',
+                        name:'task3',
+                        label:'Task #3'
+                    }]
+                }*/]
+            },{ // maybe this should be a list not checklist?
+                // how much detail is necessary?
+                xtype:'fieldset',
+                title:'Suggested Tasks',
+                defaults:{
+                    labelWidth:'80%'
+                },
+                items:[{
+                    xtype:'checkboxfield',
+                    name:'task1',
+                    label:'Oral Rehydration Salts'
+                },{
+                    xtype:'checkboxfield',
+                    name:'task2',
+                    label:'Rapid Diagnostic Test malaria'
+                },{
+                    xtype:'checkboxfield',
+                    name:'task3',
+                    label:'Check Vitamin A'
+                },{
+                    xtype:'checkboxfield',
+                    name:'task4',
+                    label:'Check albendazole'
+                },{
+                    xtype:'checkboxfield',
+                    name:'task5',
+                    label:'Blood sample for CBC'
+                }]
+            }]
+        },{
+            xtype:'formpanel',
             title:'Immunization',
             items:[{
                 xtype:'fieldset',
                 title:'Immunization Records',
                 defaults:{
                     labelWidth:'35%',
-                    disabled:true
+                    disabled:true,
+                    labelAlign:'top'
                 },
                 items:[{
                     xtype:'textfield',
-                    label:'First',
-                    id:'first_im'
-                },{
-                    xtype:'textfield',
-                    label:'Last',
-                    id:'last_im'
-                },{
-                    xtype:'textfield',
                     label:'Immunizations',
                     id:'info_im'
+                }]
+            }]
+        },{
+            xtype:'formpanel',
+            title:'Other',
+            items:[{
+                xtype:'fieldset',
+                title:'Other Records',
+                defaults:{
+                    labelWidth:'35%',
+                    disabled:true,
+                    labelAlign:'top'
+                },
+                items:[{
+                    xtype:'textfield',
+                    label:'Background',
+                    id:'info_other'
+                }]
+            }]
+        },{
+            xtype:'formpanel',
+            title:'Results',
+            items:[{
+                xtype:'fieldset',
+                title:'Laboratory Results',
+                defaults:{
+                    labelWidth:'35%',
+                    disabled:true,
+                    labelAlign:'top'
+                },
+                items:[{
+                    xtype:'textfield',
+                    label:'Some results',
+                    id:'info_res'
                 }]
             }]
         }]

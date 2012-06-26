@@ -65,7 +65,7 @@ Ext.define('mUserStories.view.loginScreen',{
                     width: "100%",
                     items: [{
                         xtype: 'label',
-                        flex: '3'
+                        flex: '2'
                     },{
                         xtype: 'button',
                         text: 'Okay',
@@ -83,7 +83,7 @@ Ext.define('mUserStories.view.loginScreen',{
                         ui:'decline-round'
                     },{
                         xtype: 'label',
-                        flex: '3'
+                        flex: '2'
                     }]
                 }]
             }]

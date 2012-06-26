@@ -21,7 +21,7 @@ Ext.define('mUserStories.view.addOptions',{
         items:[{
             xtype:'titlebar',
             docked:'top',
-            title:'Mobile User Stories',
+            title:'Add',
             items:[{
                 xtype:'button',
                 ui:'back',
@@ -125,26 +125,7 @@ Ext.define('mUserStories.view.addOptions',{
                         flex : 1,
                         id:'radio_m'
                     }]
-                },/*{
-                        xtype:'fieldconatiner',
-                        fieldLabel:'Gender',
-                        defaultType:'radiofield',
-                        defaults:{
-                            flex:1
-                        },
-                        layout:'hbox',
-                        items:[{
-                            boxLabel:'F',
-                            name:'gender_reg',
-                            inputValue:'f',
-                            id:'radio_f'
-                        },{
-                            boxLabel:'M',
-                            name:'gender_reg',
-                            inputValue:'m',
-                            id:'radio_m'
-                        }]
-                },*/{
+                },{
                     xtype: 'datepickerfield',
                     destroyPickerOnHide: true,
                     name: 'bday',
