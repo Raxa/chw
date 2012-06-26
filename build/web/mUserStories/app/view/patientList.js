@@ -14,8 +14,10 @@
  * the License.
  */
 Ext.define('mUserStories.view.patientList',{
-    extend:'Ext.Panel',
+    extend:'Ext.tab.Panel',
     config:{
+        height:'100%',
+        ui:'neutral',
         items:[{
             xtype:'titlebar',
             docked:'top',
@@ -45,28 +47,61 @@ Ext.define('mUserStories.view.patientList',{
                 id:'logout_list'
             }]
         },{
-            xtype:'list',
-            ui:'round',
-            grouped:true,
-            pinHeaders:false,
-            id:'patientlistid',
-            width:Ext.os.deviceType=='Phone'?null:'80%',
-            height:Ext.os.deviceType=='Phone'?null:'100%',
-            centered:true,
-            itemTpl:[
-                '<div>{familyName}, {givenName}</div>'
-            ],
-            onItemDisclosure:function(record,btn,index){
-               // navigate to details for specific patient and populate fields
-               Ext.getCmp('first_det').setValue(record.get('givenName'));
-               Ext.getCmp('last_det').setValue(record.get('familyName'));
-               Ext.getCmp('address_det').setValue(record.get('cityVillage'));
-               Ext.getCmp('gender_det').setValue(record.get('gender'));
-               Ext.getCmp('bday_det').setValue(record.get('birthdate'))
-               // change to next page
-               Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_DET)
-               // TODO: figure out how to put this function in controller
-            }
+            title:'All',
+            cls:'demo-list',
+            items:[{
+                xtype:'list',
+                ui:'round',
+                grouped:true,
+                pinHeaders:false,
+                id:'patientlistid',
+                width:Ext.os.deviceType=='Phone'?null:'80%',
+                height:Ext.os.deviceType=='Phone'?null:'100%',
+                centered:true,
+                indexBar:true,
+                itemTpl:[
+                    '<div>{familyName}, {givenName}</div>'
+                ],
+                onItemDisclosure:function(record,btn,index){
+                   // navigate to details for specific patient and populate fields
+                   Ext.getCmp('first_det').setValue(record.get('givenName'));
+                   Ext.getCmp('last_det').setValue(record.get('familyName'));
+                   Ext.getCmp('address_det').setValue(record.get('cityVillage'));
+                   Ext.getCmp('gender_det').setValue(record.get('gender'));
+                   Ext.getCmp('bday_det').setValue(record.get('birthdate'))
+                   // change to next page
+                   Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_DET)
+                   // TODO: figure out how to put this function in controller
+                }   
+            }]
+        },{
+            title:'Current',
+            cls:'demo-list',
+            items:[{
+                xtype:'list',
+                ui:'round',
+                grouped:true,
+                pinHeaders:false,
+                id:'patientcurrid',
+                width:Ext.os.deviceType=='Phone'?null:'80%',
+                height:Ext.os.deviceType=='Phone'?null:'100%',
+                centered:true,
+                indexBar:true,
+                itemTpl:[
+                    '<div>{familyName}, {givenName}</div>'
+                ],
+                onItemDisclosure:function(record,btn,index){
+                   // navigate to details for specific patient and populate fields
+                   Ext.getCmp('first_det').setValue(record.get('givenName'));
+                   Ext.getCmp('last_det').setValue(record.get('familyName'));
+                   Ext.getCmp('address_det').setValue(record.get('cityVillage'));
+                   Ext.getCmp('gender_det').setValue(record.get('gender'));
+                   Ext.getCmp('bday_det').setValue(record.get('birthdate'))
+                   // change to next page
+                   Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_DET)
+                   // TODO: figure out how to put this function in controller
+                }
+            }]
         }]
     }
 })

@@ -188,10 +188,8 @@ Ext.define('mUserStories.controller.basic',{
             // store items
             USER=Ext.getCmp('username').getValue();
             var pass=Ext.getCmp('password').getValue();
-
             if(USER==''||pass==''){
                 Ext.Msg.alert("Error","Please fill in all fields")
-
             }else{
                 Ext.getCmp('welcome_label').setHtml("Welcome, "+USER+"<br>"+"This is your check in for "+CURR_DATE)
                 // clear form fields
@@ -217,7 +215,16 @@ Ext.define('mUserStories.controller.basic',{
                 var lname = Ext.getCmp('last_reg').getValue();
                 var phone = Ext.getCmp('phone_reg').getValue();
                 var village = Ext.getCmp('village_reg').getValue();
-                var gender = Ext.getCmp('radiogroup').getValue();
+                var fem = Ext.getCmp('radio_f').getValue();
+                var mal = Ext.getCmp('radio_m').getValue();
+                var gender = '';
+                if(fem){
+                    gender = 'f'
+                }else if(mal){
+                    gender = 'm'
+                };
+                // console.log(Ext.getCmp('radio_m').getValue());
+                // var gender = Ext.getCmp('radiogroup').getChecked()[0].getValue().charAt(0);
                 var bday = Ext.getCmp('bday').getValue();
                 if(fname=='' || lname=='' || phone=='' || village=='' || gender=='' || bday==''){
                     Ext.Msg.alert("Error","Please fill in all fields")
