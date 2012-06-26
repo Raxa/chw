@@ -13,6 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+/*
+ * Store used for storing Person details when uploading data
+ */
 Ext.define('mUserStories.store.upPersonStore',{
     extend:'Ext.data.Store',
     config:{

@@ -13,6 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+/*
+ * Store used for data while downloading patient details
+ */
 Ext.define('mUserStories.store.downStore',{
     extend:'Ext.data.Store',
     config:{

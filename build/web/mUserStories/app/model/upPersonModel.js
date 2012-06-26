@@ -14,6 +14,9 @@
  * the License.
  */
 
+/*
+ * Model for uploading Person data
+ */
 Ext.define('mUserStories.model.upPersonModel',{
     extend:'Ext.data.Model',
     config:{

@@ -14,6 +14,9 @@
  * the License.
  */
 
+/*
+ * Model used for names in upPersonModel
+ */
 Ext.define('mUserStories.model.names',{
     extend:'Ext.data.Model',
     config:{
