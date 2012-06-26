@@ -65,6 +65,10 @@ Ext.define('mUserStories.view.patientDetails',{
                 },
                 items:[{
                     xtype:'textfield',
+                    label:'Patient ID',
+                    id:'id_det'
+                },{
+                    xtype:'textfield',
                     label:'First',
                     id:'first_det'
                 },{
@@ -142,15 +146,38 @@ Ext.define('mUserStories.view.patientDetails',{
                 xtype:'fieldset',
                 title:'Immunization Records',
                 defaults:{
-                    labelWidth:'35%',
-                    disabled:true,
-                    labelAlign:'top'
+                    labelWidth:'80%'
                 },
                 items:[{
-                    xtype:'textfield',
-                    label:'Immunizations',
-                    id:'info_im'
-                },]
+                    xtype:'checkboxfield',
+                    name:'im1',
+                    label:'Typhoid',
+                    checked:true
+                },{
+                    xtype:'checkboxfield',
+                    name:'im2',
+                    label:'Hep A',
+                    checked:true
+                },{
+                    xtype:'checkboxfield',
+                    name:'im3',
+                    label:'Polio'
+                }]
+            },{
+                xtype:'fieldset',
+                title:'Other Records',
+                defaults:{
+                    labelWidth:'80%'
+                },
+                items:[{
+                    xtype:'checkboxfield',
+                    name:'other1',
+                    label:'Vitamin A'
+                },{
+                    xtype:'checkboxfield',
+                    name:'other2',
+                    label:'Albendazole'
+                }]
             }]
         },{
             xtype:'formpanel',
