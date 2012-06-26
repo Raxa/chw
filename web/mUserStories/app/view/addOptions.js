@@ -54,6 +54,7 @@ Ext.define('mUserStories.view.addOptions',{
             }]
         },{
             xtype:'formpanel',
+            id: 'reg_form',
             title:'Register',
             items:[{
                 xtype:'fieldset',
@@ -111,19 +112,17 @@ Ext.define('mUserStories.view.addOptions',{
                     items : [{
                         xtype: 'radiofield',
                         name: 'radiogroup',
-                        value: 'female',
+                        value: 'Female',
                         label: 'Female',
                         labelWidth : '70%',
-                        flex : 1,
-                        id:'radio_f'
+                        flex : 1
                     },{
                         xtype : 'radiofield',
                         name : 'radiogroup',
-                        value : 'male',
+                        value : 'Male',
                         label : 'Male',
                         labelWidth : '70%',
-                        flex : 1,
-                        id:'radio_m'
+                        flex : 1
                     }]
                 },{
                     xtype: 'datepickerfield',

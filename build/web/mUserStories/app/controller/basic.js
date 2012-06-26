@@ -215,17 +215,10 @@ Ext.define('mUserStories.controller.basic',{
                 var lname = Ext.getCmp('last_reg').getValue();
                 var phone = Ext.getCmp('phone_reg').getValue();
                 var village = Ext.getCmp('village_reg').getValue();
-                var fem = Ext.getCmp('radio_f').getValue();
-                var mal = Ext.getCmp('radio_m').getValue();
-                var gender = '';
-                if(fem){
-                    gender = 'f'
-                }else if(mal){
-                    gender = 'm'
-                };
-                // console.log(Ext.getCmp('radio_m').getValue());
-                // var gender = Ext.getCmp('radiogroup').getChecked()[0].getValue().charAt(0);
+                var radioform = Ext.getCmp('reg_form');
+                var gender = radioform.getValues().radiogroup.charAt(0);
                 var bday = Ext.getCmp('bday').getValue();
+                
                 if(fname=='' || lname=='' || phone=='' || village=='' || gender=='' || bday==''){
                     Ext.Msg.alert("Error","Please fill in all fields")
                 }else{
@@ -248,7 +241,6 @@ Ext.define('mUserStories.controller.basic',{
                     up_store.on('write',function(){
                         console.log('Stored locally, calling identifier type');
                         // Create request for patient here
-                        
                         this.getidentifierstype(up_store.getAt(0).getData().uuid)
                     },this)
                 }
