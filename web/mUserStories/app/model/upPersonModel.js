@@ -14,7 +14,7 @@
  * the License.
  */
 
-Ext.define('mUserStories.model.upModel',{
+Ext.define('mUserStories.model.upPersonModel',{
     extend:'Ext.data.Model',
     config:{
         fields:[{
@@ -38,7 +38,7 @@ Ext.define('mUserStories.model.upModel',{
             
         },{
             name:'uuid',
-            type:'number',
+            type:'string',
             persist:false
         }]
     }

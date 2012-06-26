@@ -13,10 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-Ext.define('mUserStories.store.upStore',{
+Ext.define('mUserStories.store.upPersonStore',{
     extend:'Ext.data.Store',
     config:{
-        model:'mUserStories.model.upModel',
+        model:'mUserStories.model.upPersonModel',
         id:'searchpatientup',
         sorters:'familyName',
         grouper:function(record){
@@ -24,7 +24,7 @@ Ext.define('mUserStories.store.upStore',{
         },
         proxy:{
             type: 'rest',
-            //Hard-coding the host URL searching for patient name 'alok'
+            //The REST call here only creates a person
             url: MRSHOST+'/ws/rest/v1/person',
             headers:{
                 "Authorization": "Basic " + window.btoa("admin" + ":" + "Hello123"),
@@ -32,8 +32,8 @@ Ext.define('mUserStories.store.upStore',{
                 "Content-Type": "application/json"
             },
             reader: {
-                type: 'json',
-                rootProperty: 'results'
+                type: 'json'
+                
             },
             writer:{
                 type: 'json'

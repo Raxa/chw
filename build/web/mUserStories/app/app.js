@@ -19,8 +19,8 @@ Ext.Loader.setConfig({
 Ext.application({
     name:'mUserStories',
     controllers:['basic'],
-    models:['downModel','upModel','names','addresses'],
-    stores:['downStore','upStore'],
+    models:['downModel','upPersonModel','names','addresses','upPatientModel','identifiers'],
+    stores:['downStore','upPersonStore','location','identifiersType','upPatientStore'],
     launch:function () {
         Ext.create('mUserStories.view.loginScreen');
     }
