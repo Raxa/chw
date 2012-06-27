@@ -208,11 +208,14 @@ Ext.define('mUserStories.controller.basic',{
             }else{
                 // check to see if connected
                 this.checkConnected();
-                // TODO: check to see if user/pass hash is right
                 if(CONNECTED){
+                    // check login and save to localstorage if valid
                     this.saveBasicAuthHeader(USER,pass);
+                    // TODO: does this check validity?
                 }else{
-                    
+                    // TODO: hash user/pass
+                    // TODO: check hash against stored hash in localstorage
+                    // TODO: what happens if nothing is stored?
                 }
                 // continue to next page with proper settings
                 Ext.getCmp('welcome_label').setHtml("Welcome, "+USER+"<br>"+"This is your check in for "+CURR_DATE)
@@ -417,6 +420,24 @@ Ext.define('mUserStories.controller.basic',{
             useDefaultXhrHeader:false,
             method:'DELETE',
             success:function(){}
+        })
+        // check login and save to localStorage if valid
+        Ext.Ajax.request({
+            url:MRSHOST+'/ws/rest/v1/session',
+            withCredentials: true,
+            useDefaultXhrHeader: false,
+            headers: {
+                "Accept": "application/json",
+                "Authorization": "Basic " + window.btoa(username + ":" + password)
+            },
+            success: function (response) {
+                var authenticated = Ext.decode(response.responseText).authenticated;
+                if (authenticated) {
+                    localStorage.setItem("basicAuthHeader", "Basic " + window.btoa(username + ":" + password));
+                } else {
+                    localStorage.removeItem("basicAuthHeader");
+                }
+            }
         })
     }
 })
