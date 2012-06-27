@@ -250,6 +250,7 @@ Ext.define('mUserStories.controller.basic',{
             }
         }else{
             // TODO: doReturn()
+            this.doDownload();
             Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
         }
     },
@@ -306,6 +307,7 @@ Ext.define('mUserStories.controller.basic',{
     doBack:function(){
         // TODO: Best logic for returning to previous page - doReturn()
         // Hard coded in? Create a list of visited pages?
+        this.doDownload();
         Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
     },
     
