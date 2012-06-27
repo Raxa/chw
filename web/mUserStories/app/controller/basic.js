@@ -233,8 +233,7 @@ Ext.define('mUserStories.controller.basic',{
     doAdd:function(step,arg){
         if(arg){
             if(step==='register'){
-                
-                //                var id = Ext.getCmp('id_reg').getValue();
+                // var id = Ext.getCmp('id_reg').getValue();
                 var fname = Ext.getCmp('first_reg').getValue();
                 var lname = Ext.getCmp('last_reg').getValue();
                 var phone = Ext.getCmp('phone_reg').getValue();
