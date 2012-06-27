@@ -214,16 +214,14 @@ Ext.define('mUserStories.controller.basic',{
                     // TODO: does this check validity?
                 }else{
                     // TODO: hash user/pass
+                    var hashPass=window.btoa(USER+":"+pass);
+                    var hashStored=localStorage.getItem('basicAuthHeader');
+                    if(hasPass===hashStored){
+                        this.loginContinue();
+                    }
                     // TODO: check hash against stored hash in localstorage
                     // TODO: what happens if nothing is stored?
                 }
-                // continue to next page with proper settings
-                Ext.getCmp('welcome_label').setHtml("Welcome, "+USER+"<br>"+"This is your check in for "+CURR_DATE)
-                // clear form fields
-                Ext.getCmp('username').reset();
-                Ext.getCmp('password').reset();
-                // continue to next page
-                Ext.getCmp('viewPort').setActiveItem(PAGES.CONFIRM_LOC)
             }
         }else{
             // exit the program
@@ -437,7 +435,18 @@ Ext.define('mUserStories.controller.basic',{
                 } else {
                     localStorage.removeItem("basicAuthHeader");
                 }
+                // TODO: where does this go?
+                this.loginContinue();
             }
         })
+    },
+    loginContinue:function(){
+        // continue to next page with proper settings
+        Ext.getCmp('welcome_label').setHtml("Welcome, "+USER+"<br>"+"This is your check in for "+CURR_DATE)
+        // clear form fields
+        Ext.getCmp('username').reset();
+        Ext.getCmp('password').reset();
+        // continue to next page
+        Ext.getCmp('viewPort').setActiveItem(PAGES.CONFIRM_LOC)
     }
 })
