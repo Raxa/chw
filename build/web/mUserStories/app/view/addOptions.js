@@ -43,6 +43,9 @@ Ext.define('mUserStories.view.addOptions',{
                 iconCls:'add',
                 id:'menu_add'
             },{
+                iconCls:'action',
+                id:'inbox_det'
+            },{
                 iconCls:'arrow_up',
                 id:'up_add'
             },{

@@ -37,6 +37,9 @@ Ext.define('mUserStories.view.patientList',{
                 iconCls:'add',
                 id:'menu_list'
             },{
+                iconCls:'action',
+                id:'inbox_list'
+            },{
                 iconCls:'arrow_up',
                 id:'up_list'
             },{
