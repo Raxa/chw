@@ -30,7 +30,7 @@ Ext.define('mUserStories.view.patientList',{
                 ui:'plain'
             },
             layout:{
-            pack:'center',
+                pack:'center',
                 align:'center'
             },
             items:[{
@@ -63,19 +63,10 @@ Ext.define('mUserStories.view.patientList',{
                 centered:true,
                 indexBar:true,
                 itemTpl:[
-                    '<div>{familyName}, {givenName}</div>'
+                '<div>{familyName}, {givenName}</div>'
                 ],
                 onItemDisclosure:function(record,btn,index){
-                    Ext.getCmp('title_det').setTitle(record.get('familyName')+', '+record.get('givenName'))
-                    // navigate to details for specific patient and populate fields
-                    Ext.getCmp('first_det').setValue(record.get('givenName'));
-                    Ext.getCmp('last_det').setValue(record.get('familyName'));
-                    Ext.getCmp('address_det').setValue(record.get('cityVillage'));
-                    Ext.getCmp('gender_det').setValue(record.get('gender'));
-                    Ext.getCmp('bday_det').setValue(record.get('birthdate'))
-                    // change to next page
-                    Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_DET)
-                    // TODO: figure out how to put this function in controller
+                    discloseFunct.listDisclose(record);
                 }   
             }]
         },{
@@ -91,19 +82,10 @@ Ext.define('mUserStories.view.patientList',{
                 height:Ext.os.deviceType=='Phone'?null:'100%',
                 centered:true,
                 itemTpl:[
-                    '<div>{familyName}, {givenName}</div>'
+                '<div>{familyName}, {givenName}</div>'
                 ],
                 onItemDisclosure:function(record,btn,index){
-                    Ext.getCmp('title_det').setTitle(record.get('familyName')+', '+record.get('givenName'))
-                    // navigate to details for specific patient and populate fields
-                    Ext.getCmp('first_det').setValue(record.get('givenName'));
-                    Ext.getCmp('last_det').setValue(record.get('familyName'));
-                    Ext.getCmp('address_det').setValue(record.get('cityVillage'));
-                    Ext.getCmp('gender_det').setValue(record.get('gender'));
-                    Ext.getCmp('bday_det').setValue(record.get('birthdate'))
-                    // change to next page
-                    Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_DET)
-                    // TODO: figure out how to put this function in controller
+                    discloseFunct.listDisclose(record);
                 }
             }]
         }]

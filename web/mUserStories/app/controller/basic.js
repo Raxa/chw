@@ -156,15 +156,18 @@ Ext.define('mUserStories.controller.basic',{
                 tap:function(){
                     this.doAdd('reminder',false)
                 }
-            },inbox_list:{
+            },
+            inbox_list:{
                 tap:function(){
                     this.doToolbar('list','inbox')
                 }
-            },inbox_det:{
+            },
+            inbox_det:{
                 tap:function(){
                     this.doToolbar('details','inbox')
                 }
-            },inbox_add:{
+            },
+            inbox_add:{
                 tap:function(){
                     this.doToolbar('add','inbox')
                 }
@@ -207,7 +210,7 @@ Ext.define('mUserStories.controller.basic',{
                 Ext.Msg.alert("Error","Please fill in all fields")
             }else{
                 // check to see if connected
-                this.checkConnected();
+                this.checkConnection();
                 // TODO: check to see if user/pass hash is right
                 if(CONNECTED){
                     this.saveBasicAuthHeader(USER,pass);
@@ -330,8 +333,8 @@ Ext.define('mUserStories.controller.basic',{
     /* HELPER FUNCTIONS */   
     // check to see if connect to internet
     checkConnection:function(){
-        // TODO: how is this going to happen?
-        // TODO: set CONNECTED
+    // TODO: how is this going to happen?
+    // TODO: set CONNECTED
     },
     // deal with backbutton
     doBack:function(){
@@ -346,8 +349,8 @@ Ext.define('mUserStories.controller.basic',{
         var down_store=Ext.create('mUserStories.store.downStore');
         down_store.load();
         Ext.getCmp('patientlistid').setStore(down_store);
-        // TODO: set patientcurrid to be subset of above organized by appt time
-            // Do we need a separate store for this?
+    // TODO: set patientcurrid to be subset of above organized by appt time
+    // Do we need a separate store for this?
     },
     
     // exit the program
@@ -422,3 +425,18 @@ Ext.define('mUserStories.controller.basic',{
         })
     }
 })
+
+var discloseFunct = {
+    listDisclose: function (record) {
+        console.log('herp');
+        Ext.getCmp('title_det').setTitle(record.get('familyName')+', '+record.get('givenName'))
+        // navigate to details for specific patient and populate fields
+        Ext.getCmp('first_det').setValue(record.get('givenName'));
+        Ext.getCmp('last_det').setValue(record.get('familyName'));
+        Ext.getCmp('address_det').setValue(record.get('cityVillage'));
+        Ext.getCmp('gender_det').setValue(record.get('gender'));
+        Ext.getCmp('bday_det').setValue(record.get('birthdate'))
+        // change to next page
+        Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_DET)
+    }
+}
