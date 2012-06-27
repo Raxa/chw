@@ -21,8 +21,10 @@ var PAGES={
     CONFIRM_LOC:1,
     PATIENT_LIST:2,
     PATIENT_DET:3,
-    ADD:4
+    ADD:4,
+    INBOX:5
 };
 var USER="";
 var CURR_DATE=new Date();
 var LOCATION="";
+var CONNECTED=false;

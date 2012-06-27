@@ -29,6 +29,9 @@ Ext.define('mUserStories.controller.basic',{
             down_add:'#down_add',
             down_det:'#down_det',
             down_list:'#down_list',
+            inbox_add:'#inbox_add',
+            inbox_det:'#inbox_det',
+            inbox_list:'#inbox_list',
             logout_add:'#logout_add',
             logout_det:'#logout_det',
             logout_list:'#logout_list',
@@ -153,6 +156,18 @@ Ext.define('mUserStories.controller.basic',{
                 tap:function(){
                     this.doAdd('reminder',false)
                 }
+            },inbox_list:{
+                tap:function(){
+                    this.doToolbar('list','inbox')
+                }
+            },inbox_det:{
+                tap:function(){
+                    this.doToolbar('details','inbox')
+                }
+            },inbox_add:{
+                tap:function(){
+                    this.doToolbar('add','inbox')
+                }
             }
         }
     },
@@ -176,6 +191,8 @@ Ext.define('mUserStories.controller.basic',{
             },{
                 // display options for adding
                 xclass:'mUserStories.view.addOptions'
+            },{
+                xclass:'mUserStories.view.notificationInbox'
             }]
         })
     },
@@ -183,14 +200,21 @@ Ext.define('mUserStories.controller.basic',{
     // login to the application
     doLogin:function(arg){
         if(arg){
-            // TODO: check login credentials - where do we login?
-            // chw accounts on OpenMRS?
             // store items
             USER=Ext.getCmp('username').getValue();
             var pass=Ext.getCmp('password').getValue();
             if(USER==''||pass==''){
                 Ext.Msg.alert("Error","Please fill in all fields")
             }else{
+                // check to see if connected
+                this.checkConnected();
+                // TODO: check to see if user/pass hash is right
+                if(CONNECTED){
+                    this.saveBasicAuthHeader(USER,pass);
+                }else{
+                    
+                }
+                // continue to next page with proper settings
                 Ext.getCmp('welcome_label').setHtml("Welcome, "+USER+"<br>"+"This is your check in for "+CURR_DATE)
                 // clear form fields
                 Ext.getCmp('username').reset();
@@ -209,8 +233,7 @@ Ext.define('mUserStories.controller.basic',{
     doAdd:function(step,arg){
         if(arg){
             if(step==='register'){
-                
-                //                var id = Ext.getCmp('id_reg').getValue();
+                // var id = Ext.getCmp('id_reg').getValue();
                 var fname = Ext.getCmp('first_reg').getValue();
                 var lname = Ext.getCmp('last_reg').getValue();
                 var phone = Ext.getCmp('phone_reg').getValue();
@@ -299,10 +322,17 @@ Ext.define('mUserStories.controller.basic',{
                     this.doDownload();
                 }
             })
+        }else if(arg==='inbox'){
+            Ext.getCmp('viewPort').setActiveItem(PAGES.INBOX)
         }
     },
     
     /* HELPER FUNCTIONS */   
+    // check to see if connect to internet
+    checkConnection:function(){
+        // TODO: how is this going to happen?
+        // TODO: set CONNECTED
+    },
     // deal with backbutton
     doBack:function(){
         // TODO: Best logic for returning to previous page - doReturn()
@@ -380,5 +410,15 @@ Ext.define('mUserStories.controller.basic',{
         PatientStore.on('write',function(){
             console.log('------Patient Created successfully------');
         },this) 
+    },
+    saveBasicAuthHeader:function(username,password){
+        // delete existing logged in sessions
+        Ext.Ajax.request({
+            url:MRSHOST+'/ws/rest/v1/session',
+            withCredentials:true,
+            useDefaultXhrHeader:false,
+            method:'DELETE',
+            success:function(){}
+        })
     }
 })
