@@ -257,13 +257,13 @@ Ext.define('mUserStories.controller.basic',{
                             cityVillage:village
                         }]
                     });
-                    
+                    //Adding registration details into local storage (a store)
                     up_store.add(up_Model);
+                    //REST call for creating a Person
                     up_store.sync();
-                    
                     up_store.on('write',function(){
                         console.log('Stored locally, calling identifier type');
-                        // Create request for patient here
+                        // Now that Person is created, send request to create Patient
                         this.getidentifierstype(up_store.getAt(0).getData().uuid)
                     },this)
                 }
@@ -325,6 +325,7 @@ Ext.define('mUserStories.controller.basic',{
             Ext.getCmp('viewPort').setActiveItem(PAGES.INBOX)
         }
     },
+    
     /* HELPER FUNCTIONS */   
     // check to see if connect to internet
     checkConnection:function(){
@@ -337,6 +338,8 @@ Ext.define('mUserStories.controller.basic',{
         // Hard coded in? Create a list of visited pages?
         Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
     },
+    
+    // Download patient with details
     doDownload:function(){
         var down_store=Ext.create('mUserStories.store.downStore');
         down_store.load();
@@ -344,6 +347,7 @@ Ext.define('mUserStories.controller.basic',{
         // TODO: set patientcurrid to be subset of above organized by appt time
             // Do we need a separate store for this?
     },
+    
     // exit the program
     doExit:function(){
         // TODO: make sure all information is uploaded
@@ -352,36 +356,38 @@ Ext.define('mUserStories.controller.basic',{
         // return to login screen
         Ext.getCmp('viewPort').setActiveItem(PAGES.LOGIN_SCREEN)
     },
-    doUpload:function(){
-    // TODO: upload all information in localStorage
-    },
+    
     /* this funtions makes a get call to get the patient identifiers type */
     getidentifierstype: function (personUuid) {
         var identifiers = Ext.create('mUserStories.store.identifiersType')
         identifiers.load();
         console.log('Identifiers loaded');
-        // this statement calls getlocation() as soon as the get call is successful
+        // This statement calls getlocation() as soon as the get call is successful
         identifiers.on('load', function () {
             console.log('Getting location');
+            //Once the identifiers are loaded, fetch location parameters
             this.getlocation(personUuid, identifiers.getAt(0).getData().uuid)
         }, this);
     },
+    
     /* this funtions makes a get call to get the location uuid */
     getlocation: function (personUuid, identifierType) {
         var locations = Ext.create('mUserStories.store.location')
         locations.load();
         console.log('locations loaded');
-        // this statement calls makePatient() as soon as the get call is successful
+        // Now that we have both, identifiers type and location we can create a Patient
         locations.on('load', function () {
             console.log('Sending request to create patient');
             this.makePatient(personUuid, identifierType, locations.getAt(0).getData().uuid)
         }, this)
     },
+    
     getPatientIdentifier : function(){
         //dummy funtion to be used for creating partient
         // TODO: writen a  ramdom no for patient identufier but it should be a unique id
         return Math.floor(Math.random() * 1000000000);
     },
+    
     /* this funtions makes a post call to creat the patient with three parameter which will sent as person, identifiertype 
        and loaction */
     makePatient: function (personUuid, identifierType, location) {
