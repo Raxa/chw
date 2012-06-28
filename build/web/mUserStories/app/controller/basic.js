@@ -26,25 +26,15 @@ Ext.define('mUserStories.controller.basic',{
             cancel_rem:'#cancel_rem',
             back_add:'#back_add',
             back_det:'#back_det',
-            down_add:'#down_add',
-            down_det:'#down_det',
-            down_list:'#down_list',
-            inbox_add:'#inbox_add',
-            inbox_det:'#inbox_det',
-            inbox_list:'#inbox_list',
-            logout_add:'#logout_add',
-            logout_det:'#logout_det',
-            logout_list:'#logout_list',
-            menu_add:'#menu_add',
-            menu_det:'#menu_det',
-            menu_list:'#menu_list',
+            downButton:'#downButton',
+            inboxButton:'#inboxButton',
+            logoutButton:'#logoutButton',
+            menuButton:'#menuButton',
             ok_loc:'#ok_loc',
             ok_login:'#ok_login',
             ok_reg:"#ok_reg",
             ok_rem:'#ok_rem',
-            up_add:'#up_add',
-            up_det:'#up_det',
-            up_list:'#up_list'
+            upButton:'#upButton'
         },
         control:{
             back_add:{
@@ -71,53 +61,21 @@ Ext.define('mUserStories.controller.basic',{
                 tap:function(){
                     this.doAdd('reminder',false)
                 }
-            },down_add:{
+            },downButton:{
                 tap:function(){
-                    this.doToolbar('add','down')
+                    this.doToolbar('down')
                 }
-            },down_det:{
+            },inboxButton:{
                 tap:function(){
-                    this.doToolbar('details','down')
+                    this.doToolbar('inbox')
                 }
-            },down_list:{
-                tap:function(){
-                    this.doToolbar('list','down')
-                }
-            },inbox_add:{
-                tap:function(){
-                    this.doToolbar('add','inbox')
-                }
-            },inbox_det:{
-                tap:function(){
-                    this.doToolbar('details','inbox')
-                }
-            },inbox_list:{
-                tap:function(){
-                    this.doToolbar('list','inbox')
-                }
-            },logout_add:{
+            },logoutButton:{
                 tap:function(){
                     this.doExit()
                 }
-            },logout_det:{
+            },menuButton:{
                 tap:function(){
-                    this.doExit()
-                }
-            },logout_list:{
-                tap:function(){
-                    this.doExit()
-                }
-            },menu_det:{
-                tap:function(){
-                    this.doToolbar('details','menu')
-                }
-            },menu_add:{
-                tap:function(){
-                    this.doToolbar('add','menu')
-                }
-            },menu_list:{
-                tap:function(){
-                    this.doToolbar('list','menu')
+                    this.doToolbar('menu')
                 }
             },ok_loc:{
                 tap:function(){
@@ -135,17 +93,9 @@ Ext.define('mUserStories.controller.basic',{
                 tap:function(){
                     this.doAdd('reminder',true)
                 }
-            },up_add:{
+            },upButton:{
                 tap:function(){
-                    this.doToolbar('add','up')
-                }
-            },up_det:{
-                tap:function(){
-                    this.doToolbar('details','up')
-                }
-            },up_list:{
-                tap:function(){
-                    this.doToolbar('list','up')
+                    this.doToolbar('up')
                 }
             }
         }
@@ -268,7 +218,7 @@ Ext.define('mUserStories.controller.basic',{
         }
     },   
     // manage navigation based on lower toolbar
-    doToolbar:function(screen,arg){
+    doToolbar:function(arg){
         if(arg==='menu'){
             Ext.getCmp('viewPort').setActiveItem(PAGES.ADD)
         }else if(arg==='up'){

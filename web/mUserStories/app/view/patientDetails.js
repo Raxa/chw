@@ -30,32 +30,7 @@ Ext.define('mUserStories.view.patientDetails',{
                 id:'back_det'
             }]
         },{
-            xtype:'toolbar',
-            docked:'bottom',
-            defaults:{
-                iconMask:true,
-                ui:'plain'
-            },
-            layout:{
-                pack:'center',
-                align:'center'
-            },
-            items:[{
-                iconCls:'add',
-                id:'menu_det'
-            },{
-                iconCls:'action',
-                id:'inbox_det'
-            },{
-                iconCls:'arrow_up',
-                id:'up_det'
-            },{
-                iconCls:'arrow_down',
-                id:'down_det'
-            },{
-                iconCls:'delete',
-                id:'logout_det'
-            }]
+            xclass:'mUserStories.view.userToolbar'
         },{
             xtype:'formpanel',
             title:'Basic',

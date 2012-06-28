@@ -29,32 +29,7 @@ Ext.define('mUserStories.view.addOptions',{
                 id:'back_add'
             }]
         },{
-            xtype:'toolbar',
-            docked:'bottom',
-            defaults:{
-                iconMask:true,
-                ui:'plain'
-            },
-            layout:{
-                pack:'center',
-                align:'center'
-            },
-            items:[{
-                iconCls:'add',
-                id:'menu_add'
-            },{
-                iconCls:'action',
-                id:'inbox_det'
-            },{
-                iconCls:'arrow_up',
-                id:'up_add'
-            },{
-                iconCls:'arrow_down',
-                id:'down_add'
-            },{
-                iconCls:'delete',
-                id:'logout_add'
-            }]
+            xclass:'mUserStories.view.userToolbar'
         },{
             xtype:'formpanel',
             id: 'reg_form',
