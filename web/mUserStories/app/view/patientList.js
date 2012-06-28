@@ -66,7 +66,7 @@ Ext.define('mUserStories.view.patientList',{
                 '<div>{familyName}, {givenName}</div>'
                 ],
                 onItemDisclosure:function(record,btn,index){
-                    discloseFunct.listDisclose(record);
+                    helper.listDisclose(record);
                 }   
             }]
         },{
@@ -85,7 +85,7 @@ Ext.define('mUserStories.view.patientList',{
                 '<div>{familyName}, {givenName}</div>'
                 ],
                 onItemDisclosure:function(record,btn,index){
-                    discloseFunct.listDisclose(record);
+                    helper.listDisclose(record);
                 }
             }]
         }]

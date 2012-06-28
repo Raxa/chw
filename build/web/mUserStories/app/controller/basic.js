@@ -211,20 +211,22 @@ Ext.define('mUserStories.controller.basic',{
             }else{
                 // check to see if connected
                 this.checkConnection();
-                // TODO: check to see if user/pass hash is right
+                // check to see if user/pass hash is right
                 if(CONNECTED){
                     // check login and save to localstorage if valid
                     this.saveBasicAuthHeader(USER,pass);
-                    // TODO: does this check validity?
-                }else{
-                    // TODO: hash user/pass
-                    var hashPass=window.btoa(USER+":"+pass);
-                    var hashStored=localStorage.getItem('basicAuthHeader');
-                    if(hasPass===hashStored){
-                        this.loginContinue();
-                    }
-                    // TODO: check hash against stored hash in localstorage
+                }else if(localStorage.getItem('basicAuthHeader')===null){
                     // TODO: what happens if nothing is stored?
+                }else{
+                    // hash user/pass
+                    var hashPass='Basic ' + window.btoa(USER+":"+pass);
+                    var hashStored=localStorage.getItem('basicAuthHeader');
+                    // compare hashPass to hashStored
+                    if(hashPass===hashStored){
+                        helper.loginContinue();
+                    }else{
+                        Ext.Msg.alert("Error","Please try again")
+                    }
                 }
             }
         }else{
@@ -438,26 +440,17 @@ Ext.define('mUserStories.controller.basic',{
                 var authenticated = Ext.decode(response.responseText).authenticated;
                 if (authenticated) {
                     localStorage.setItem("basicAuthHeader", "Basic " + window.btoa(username + ":" + password));
+                    helper.loginContinue();
                 } else {
                     localStorage.removeItem("basicAuthHeader");
+                    Ext.Msg.alert("Error","Please try again")
                 }
-                // TODO: where does this go?
-                this.loginContinue();
             }
         })
-    },
-    loginContinue:function(){
-        // continue to next page with proper settings
-        Ext.getCmp('welcome_label').setHtml("Welcome, "+USER+"<br>"+"This is your check in for "+CURR_DATE)
-        // clear form fields
-        Ext.getCmp('username').reset();
-        Ext.getCmp('password').reset();
-        // continue to next page
-        Ext.getCmp('viewPort').setActiveItem(PAGES.CONFIRM_LOC)
     }
 })
 
-var discloseFunct = {
+var helper = {
     listDisclose: function (record) {
         console.log('herp');
         Ext.getCmp('title_det').setTitle(record.get('familyName')+', '+record.get('givenName'))
@@ -469,5 +462,14 @@ var discloseFunct = {
         Ext.getCmp('bday_det').setValue(record.get('birthdate'))
         // change to next page
         Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_DET)
+    },
+    loginContinue:function(){
+        // continue to next page with proper settings
+        Ext.getCmp('welcome_label').setHtml("Welcome, "+USER+"<br>"+"This is your check in for "+CURR_DATE)
+        // clear form fields
+        Ext.getCmp('username').reset();
+        Ext.getCmp('password').reset();
+        // continue to next page
+        Ext.getCmp('viewPort').setActiveItem(PAGES.CONFIRM_LOC)
     }
 }
