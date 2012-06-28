@@ -28,3 +28,26 @@ var USER="";
 var CURR_DATE=new Date();
 var LOCATION="";
 var CONNECTED=false;
+var helper = {
+    listDisclose: function (record) {
+        
+        Ext.getCmp('title_det').setTitle(record.get('familyName')+', '+record.get('givenName'))
+        // navigate to details for specific patient and populate fields
+        Ext.getCmp('first_det').setValue(record.get('givenName'));
+        Ext.getCmp('last_det').setValue(record.get('familyName'));
+        Ext.getCmp('address_det').setValue(record.get('cityVillage'));
+        Ext.getCmp('gender_det').setValue(record.get('gender'));
+        Ext.getCmp('bday_det').setValue(record.get('birthdate'))
+        // change to next page
+        Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_DET)
+    },
+    loginContinue:function(){
+        // continue to next page with proper settings
+        Ext.getCmp('welcome_label').setHtml("Welcome, "+USER+"<br>"+"This is your check in for "+CURR_DATE)
+        // clear form fields
+        Ext.getCmp('username').reset();
+        Ext.getCmp('password').reset();
+        // continue to next page
+        Ext.getCmp('viewPort').setActiveItem(PAGES.CONFIRM_LOC)
+    }
+}

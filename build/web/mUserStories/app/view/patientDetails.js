@@ -66,11 +66,11 @@ Ext.define('mUserStories.view.patientDetails',{
                     labelWidth:'35%',
                     disabled:true
                 },
-                items:[{
+                items:[/*{
                     xtype:'textfield',
                     label:'Patient ID',
                     id:'id_det'
-                },{
+                },*/{
                     xtype:'textfield',
                     label:'First',
                     id:'first_det'
@@ -78,11 +78,11 @@ Ext.define('mUserStories.view.patientDetails',{
                     xtype:'textfield',
                     label:'Last',
                     id:'last_det'
-                },{
+                },/*{
                     xtype:'textfield',
                     label:'Phone',
                     id:'phone_det'
-                },{
+                },*/{
                     xtype:'textfield',
                     label:'Address',
                     id:'address_det'

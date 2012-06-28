@@ -47,129 +47,105 @@ Ext.define('mUserStories.controller.basic',{
             up_list:'#up_list'
         },
         control:{
-            ok_login:{
-                tap:function(){
-                    this.doLogin(true)
-                }
-            },
-            cancel_login:{
-                tap:function(){
-                    this.doLogin(false)
-                }
-            },
-            ok_loc:{
-                tap:function(){
-                    this.doLocation(true)
-                }
-            },
-            cancel_loc:{
-                tap:function(){
-                    this.doLocation(false)
-                }
-            },
-            menu_list:{
-                tap:function(){
-                    this.doToolbar('list','menu')
-                }
-            },
-            up_list:{
-                tap:function(){
-                    this.doToolbar('list','up')
-                }
-            },
-            down_list:{
-                tap:function(){
-                    this.doToolbar('list','down')
-                }
-            },
-            logout_list:{
-                tap:function(){
-                    this.doExit()
-                }
-            },
-            menu_det:{
-                tap:function(){
-                    this.doToolbar('details','menu')
-                }
-            },
-            up_det:{
-                tap:function(){
-                    this.doToolbar('details','up')
-                }
-            },
-            down_det:{
-                tap:function(){
-                    this.doToolbar('details','down')
-                }
-            },
-            logout_det:{
-                tap:function(){
-                    this.doExit()
-                }
-            },
-            back_det:{
-                tap:function(){
-                    this.doBack()
-                }
-            },
-            menu_add:{
-                tap:function(){
-                    this.doToolbar('add','menu')
-                }
-            },
-            up_add:{
-                tap:function(){
-                    this.doToolbar('add','up')
-                }
-            },
-            down_add:{
-                tap:function(){
-                    this.doToolbar('add','down')
-                }
-            },
-            logout_add:{
-                tap:function(){
-                    this.doExit()
-                }
-            },
             back_add:{
                 tap:function(){
                     this.doBack()
                 }
-            },
-            ok_reg:{
+            },back_det:{
                 tap:function(){
-                    this.doAdd('register',true)
+                    this.doBack()
                 }
-            },
-            cancel_reg:{
+            },cancel_loc:{
+                tap:function(){
+                    this.doLocation(false)
+                }
+            },cancel_login:{
+                tap:function(){
+                    this.doLogin(false)
+                }
+            },cancel_reg:{
                 tap:function(){
                     this.doAdd('register',false)
                 }
-            },
-            ok_rem:{
-                tap:function(){
-                    this.doAdd('reminder',true)
-                }
-            },
-            cancel_rem:{
+            },cancel_rem:{
                 tap:function(){
                     this.doAdd('reminder',false)
                 }
-            },
-            inbox_list:{
+            },down_add:{
                 tap:function(){
-                    this.doToolbar('list','inbox')
+                    this.doToolbar('add','down')
                 }
-            },
-            inbox_det:{
+            },down_det:{
+                tap:function(){
+                    this.doToolbar('details','down')
+                }
+            },down_list:{
+                tap:function(){
+                    this.doToolbar('list','down')
+                }
+            },inbox_add:{
+                tap:function(){
+                    this.doToolbar('add','inbox')
+                }
+            },inbox_det:{
                 tap:function(){
                     this.doToolbar('details','inbox')
                 }
-            },
-            inbox_add:{
+            },inbox_list:{
                 tap:function(){
-                    this.doToolbar('add','inbox')
+                    this.doToolbar('list','inbox')
+                }
+            },logout_add:{
+                tap:function(){
+                    this.doExit()
+                }
+            },logout_det:{
+                tap:function(){
+                    this.doExit()
+                }
+            },logout_list:{
+                tap:function(){
+                    this.doExit()
+                }
+            },menu_det:{
+                tap:function(){
+                    this.doToolbar('details','menu')
+                }
+            },menu_add:{
+                tap:function(){
+                    this.doToolbar('add','menu')
+                }
+            },menu_list:{
+                tap:function(){
+                    this.doToolbar('list','menu')
+                }
+            },ok_loc:{
+                tap:function(){
+                    this.doLocation(true)
+                }
+            },ok_login:{
+                tap:function(){
+                    this.doLogin(true)
+                }
+            },ok_reg:{
+                tap:function(){
+                    this.doAdd('register',true)
+                }
+            },ok_rem:{
+                tap:function(){
+                    this.doAdd('reminder',true)
+                }
+            },up_add:{
+                tap:function(){
+                    this.doToolbar('add','up')
+                }
+            },up_det:{
+                tap:function(){
+                    this.doToolbar('details','up')
+                }
+            },up_list:{
+                tap:function(){
+                    this.doToolbar('list','up')
                 }
             }
         }
@@ -199,24 +175,7 @@ Ext.define('mUserStories.controller.basic',{
             }]
         })
     },
-    /* STARTUP FUNCTIONS */
-    // login to the application
-    doLogin:function(arg){
-        if(arg){
-            // store items
-            USER=Ext.getCmp('username').getValue();
-            var pass=Ext.getCmp('password').getValue();
-            if(USER==''||pass==''){
-                Ext.Msg.alert("Error","Please fill in all fields")
-            }else{
-                this.saveBasicAuthHeader(USER,pass);
-            }
-        }else{
-            // exit the program
-            this.doExit();
-        }
-    },   
-    /* SCREEN FUNCTIONS */
+/* SCREEN FUNCTIONS */
     // add registrations and reminders
     // TODO: should we add more functionality? ex. place order for sample
     doAdd:function(step,arg){
@@ -292,6 +251,22 @@ Ext.define('mUserStories.controller.basic',{
             this.doExit();
         }
     },
+    // login to the application
+    doLogin:function(arg){
+        if(arg){
+            // store items
+            USER=Ext.getCmp('username').getValue();
+            var pass=Ext.getCmp('password').getValue();
+            if(USER==''||pass==''){
+                Ext.Msg.alert("Error","Please fill in all fields")
+            }else{
+                this.saveBasicAuthHeader(USER,pass);
+            }
+        }else{
+            // exit the program
+            this.doExit();
+        }
+    },   
     // manage navigation based on lower toolbar
     doToolbar:function(screen,arg){
         if(arg==='menu'){
@@ -315,8 +290,7 @@ Ext.define('mUserStories.controller.basic',{
             Ext.getCmp('viewPort').setActiveItem(PAGES.INBOX)
         }
     },
-    
-    /* HELPER FUNCTIONS */  
+/* HELPER FUNCTIONS */  
     // deal with backbutton
     doBack:function(){
         // TODO: Best logic for returning to previous page - doReturn()
@@ -324,7 +298,6 @@ Ext.define('mUserStories.controller.basic',{
         this.doDownload();
         Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
     },
-    
     // Download patient with details
     doDownload:function(){
         var down_store=Ext.create('mUserStories.store.downStore');
@@ -333,7 +306,6 @@ Ext.define('mUserStories.controller.basic',{
     // TODO: set patientcurrid to be subset of above organized by appt time
     // Do we need a separate store for this?
     },
-    
     // exit the program
     doExit:function(){
         // TODO: make sure all information is uploaded
@@ -342,7 +314,6 @@ Ext.define('mUserStories.controller.basic',{
         // return to login screen
         Ext.getCmp('viewPort').setActiveItem(PAGES.LOGIN_SCREEN)
     },
-    
     /* this funtions makes a get call to get the patient identifiers type */
     getidentifierstype: function (personUuid) {
         var identifiers = Ext.create('mUserStories.store.identifiersType')
@@ -355,7 +326,6 @@ Ext.define('mUserStories.controller.basic',{
             this.getlocation(personUuid, identifiers.getAt(0).getData().uuid)
         }, this);
     },
-    
     /* this funtions makes a get call to get the location uuid */
     getlocation: function (personUuid, identifierType) {
         var locations = Ext.create('mUserStories.store.location')
@@ -367,14 +337,12 @@ Ext.define('mUserStories.controller.basic',{
             this.makePatient(personUuid, identifierType, locations.getAt(0).getData().uuid)
         }, this)
     },
-    
     getPatientIdentifier : function(){
         //dummy funtion to be used for creating partient
         // TODO: writen a  ramdom no for patient identufier but it should be a unique id
         return Math.floor(Math.random() * 1000000000);
     },
-    
-    /* this funtions makes a post call to creat the patient with three parameter which will sent as person, identifiertype 
+    /* this funtions makes a post call to create the patient with three parameter which will sent as person, identifiertype 
        and loaction */
     makePatient: function (personUuid, identifierType, location) {
         var patient = Ext.create('mUserStories.model.upPatientModel', {
@@ -393,7 +361,16 @@ Ext.define('mUserStories.controller.basic',{
         PatientStore.sync();
         PatientStore.on('write',function(){
             console.log('------Patient Created successfully------');
-        },this) 
+        },this) ;
+        
+        Ext.getCmp('first_reg').reset();
+        Ext.getCmp('last_reg').reset();
+        Ext.getCmp('phone_reg').reset();
+        Ext.getCmp('village_reg').reset();
+        Ext.getCmp('bday').reset();
+        Ext.getCmp('reg_form').reset();
+        this.doDownload();
+        Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_LIST)
     },
     saveBasicAuthHeader:function(username,password){
         // delete existing logged in sessions
@@ -439,27 +416,3 @@ Ext.define('mUserStories.controller.basic',{
         })
     }
 })
-
-var helper = {
-    listDisclose: function (record) {
-        
-        Ext.getCmp('title_det').setTitle(record.get('familyName')+', '+record.get('givenName'))
-        // navigate to details for specific patient and populate fields
-        Ext.getCmp('first_det').setValue(record.get('givenName'));
-        Ext.getCmp('last_det').setValue(record.get('familyName'));
-        Ext.getCmp('address_det').setValue(record.get('cityVillage'));
-        Ext.getCmp('gender_det').setValue(record.get('gender'));
-        Ext.getCmp('bday_det').setValue(record.get('birthdate'))
-        // change to next page
-        Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_DET)
-    },
-    loginContinue:function(){
-        // continue to next page with proper settings
-        Ext.getCmp('welcome_label').setHtml("Welcome, "+USER+"<br>"+"This is your check in for "+CURR_DATE)
-        // clear form fields
-        Ext.getCmp('username').reset();
-        Ext.getCmp('password').reset();
-        // continue to next page
-        Ext.getCmp('viewPort').setActiveItem(PAGES.CONFIRM_LOC)
-    }
-}
