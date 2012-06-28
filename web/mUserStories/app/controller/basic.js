@@ -452,7 +452,7 @@ Ext.define('mUserStories.controller.basic',{
 
 var helper = {
     listDisclose: function (record) {
-        console.log('herp');
+        
         Ext.getCmp('title_det').setTitle(record.get('familyName')+', '+record.get('givenName'))
         // navigate to details for specific patient and populate fields
         Ext.getCmp('first_det').setValue(record.get('givenName'));
