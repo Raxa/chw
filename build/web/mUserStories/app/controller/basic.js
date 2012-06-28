@@ -316,31 +316,7 @@ Ext.define('mUserStories.controller.basic',{
         }
     },
     
-    /* HELPER FUNCTIONS */   
-    // check to see if connect to internet
-    checkConnection:function(){
-        Ext.Ajax.request({
-            url:MRSHOST+'/ws/rest/v1/session',
-            withCredentials: true,
-            useDefaultXhrHeader: false,
-            headers: {
-                "Accept": "application/json",
-                "Authorization": "Basic " + window.btoa(username + ":" + password)
-            },
-            success: function (response) {
-                var text = response.responseText;
-                console.log(text);  
-            },
-            failure:function(response){
-                var text=response.responseText;
-                console.log(text);
-                helper.loginContinue();
-            }
-        })
-        
-    // TODO: how is this going to happen?
-    // TODO: set CONNECTED
-    },
+    /* HELPER FUNCTIONS */  
     // deal with backbutton
     doBack:function(){
         // TODO: Best logic for returning to previous page - doReturn()
