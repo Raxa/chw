@@ -209,25 +209,7 @@ Ext.define('mUserStories.controller.basic',{
             if(USER==''||pass==''){
                 Ext.Msg.alert("Error","Please fill in all fields")
             }else{
-                // check to see if connected
-                this.checkConnection();
-                // check to see if user/pass hash is right
-                if(CONNECTED){
-                    // check login and save to localstorage if valid
-                    this.saveBasicAuthHeader(USER,pass);
-                }else if(localStorage.getItem('basicAuthHeader')===null){
-                    // TODO: what happens if nothing is stored?
-                }else{
-                    // hash user/pass
-                    var hashPass='Basic ' + window.btoa(USER+":"+pass);
-                    var hashStored=localStorage.getItem('basicAuthHeader');
-                    // compare hashPass to hashStored
-                    if(hashPass===hashStored){
-                        helper.loginContinue();
-                    }else{
-                        Ext.Msg.alert("Error","Please try again")
-                    }
-                }
+                this.saveBasicAuthHeader(USER,pass);
             }
         }else{
             // exit the program
@@ -337,6 +319,25 @@ Ext.define('mUserStories.controller.basic',{
     /* HELPER FUNCTIONS */   
     // check to see if connect to internet
     checkConnection:function(){
+        Ext.Ajax.request({
+            url:MRSHOST+'/ws/rest/v1/session',
+            withCredentials: true,
+            useDefaultXhrHeader: false,
+            headers: {
+                "Accept": "application/json",
+                "Authorization": "Basic " + window.btoa(username + ":" + password)
+            },
+            success: function (response) {
+                var text = response.responseText;
+                console.log(text);  
+            },
+            failure:function(response){
+                var text=response.responseText;
+                console.log(text);
+                helper.loginContinue();
+            }
+        })
+        
     // TODO: how is this going to happen?
     // TODO: set CONNECTED
     },
@@ -437,12 +438,25 @@ Ext.define('mUserStories.controller.basic',{
                 "Authorization": "Basic " + window.btoa(username + ":" + password)
             },
             success: function (response) {
+                CONNECTED=true;
                 var authenticated = Ext.decode(response.responseText).authenticated;
                 if (authenticated) {
                     localStorage.setItem("basicAuthHeader", "Basic " + window.btoa(username + ":" + password));
                     helper.loginContinue();
                 } else {
                     localStorage.removeItem("basicAuthHeader");
+                    Ext.Msg.alert("Error","Please try again")
+                }
+            },
+            failure:function(response){
+                CONNECTED=false;
+                // hash user/pass
+                var hashPass='Basic ' + window.btoa(username+":"+password);
+                var hashStored=localStorage.getItem('basicAuthHeader');
+                // compare hashPass to hashStored
+                if(hashPass===hashStored){
+                    helper.loginContinue();
+                }else{
                     Ext.Msg.alert("Error","Please try again")
                 }
             }
