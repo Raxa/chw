@@ -68,19 +68,24 @@ Ext.define('mUserStories.view.loginScreen',{
                         flex: '2'
                     },{
                         xtype: 'button',
-                        text: 'Okay',
+                        // text: 'Okay',
                         id: 'ok_login',
-                        flex: '3',
-                        ui:'confirm-round'
+                        // flex: '1',
+                        ui:'confirm-round',
+                        icon:'resources/rsz_check.png',
+                        width:'50px',
+                        height:'50px'
                     },{
                         xtype: 'label',
-                        flex: '1'
+                        flex: '2'
                     },{
                         xtype: 'button',
-                        text: 'Cancel',
+                        // text: 'Cancel',
                         id: 'cancel_login',
-                        flex: '3',
-                        ui:'decline-round'
+                        ui:'decline-round',
+                        icon:'resources/rsz_delete.png',
+                        width:'50px',
+                        height:'50px'
                     },{
                         xtype: 'label',
                         flex: '2'

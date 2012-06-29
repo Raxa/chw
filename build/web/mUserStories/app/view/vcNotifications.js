@@ -29,7 +29,7 @@ Ext.define('mUserStories.view.vcNotifications',{
             title:'Compose',
             items:[{
                 xtype:'fieldset',
-                title:'Basic Information',
+                title:'Create Report',
                 defaults:{
                     labelWidth:'35%'
                 },

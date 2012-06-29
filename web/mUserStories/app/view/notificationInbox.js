@@ -35,7 +35,7 @@ Ext.define('mUserStories.view.notificationInbox',{
             title:'Compose',
             items:[{
                 xtype:'fieldset',
-                title:'Basic Information',
+                title:'Create Report',
                 defaults:{
                     labelWidth:'35%'
                 },

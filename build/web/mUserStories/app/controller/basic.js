@@ -337,6 +337,15 @@ Ext.define('mUserStories.controller.basic',{
         // TODO: writen a  ramdom no for patient identufier but it should be a unique id
         return Math.floor(Math.random() * 1000000000);
     },
+    isEmpty:function(arg){
+        // TODO: check to see if the select field is empty
+        // TODO: continue to arg if not empty
+    },
+    isOther:function(arg){
+        // TODO: check to see if the select field is other
+        // TODO: pop up screen prompt
+        // TODO: continue to arg 
+    },
     /* this funtions makes a post call to create the patient with three parameter which will sent as person, identifiertype 
        and loaction */
     makePatient: function (personUuid, identifierType, location) {
