@@ -29,7 +29,7 @@ var PAGES={
 };
 var USER=new Object();
 USER.name='';
-USER.type='CHW';
+USER.type='VC';
 var CURR_DATE=new Date();
 var LOCATION="";
 var CONNECTED=false;

@@ -248,7 +248,8 @@ Ext.define('mUserStories.controller.basic',{
             if(USER.name==''||pass==''){
                 Ext.Msg.alert("Error","Please fill in all fields")
             }else{
-                this.saveBasicAuthHeader(USER.name,pass);
+                //this.saveBasicAuthHeader(USER.name,pass);
+                helper.loginContinue();
             }
         }else{
             // exit the program

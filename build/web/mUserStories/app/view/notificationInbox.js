@@ -29,32 +29,7 @@ Ext.define('mUserStories.view.notificationInbox',{
                 id:'back_inb'
             }]
         },{
-            xtype:'toolbar',
-            docked:'bottom',
-            defaults:{
-                iconMask:true,
-                ui:'plain'
-            },
-            layout:{
-            pack:'center',
-                align:'center'
-            },
-            items:[{
-                iconCls:'add',
-                id:'menu_list'
-            },{
-                iconCls:'action',
-                id:'inbox_list'
-            },{
-                iconCls:'arrow_up',
-                id:'up_list'
-            },{
-                iconCls:'arrow_down',
-                id:'down_list'
-            },{
-                iconCls:'delete',
-                id:'logout_list'
-            }]
+            xclass:'mUserStories.view.userToolbar'
         },{
             xtype:'formpanel',
             title:'Compose',
