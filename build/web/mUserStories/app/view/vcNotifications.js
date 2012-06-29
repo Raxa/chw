@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-Ext.define('mUserStories.view.notificationInbox',{
+Ext.define('mUserStories.view.vcNotifications',{
     extend:'Ext.tab.Panel',
     config:{
         height:'100%',
@@ -21,40 +21,9 @@ Ext.define('mUserStories.view.notificationInbox',{
         items:[{
             xtype:'titlebar',
             docked:'top',
-            title:'Notifications',
-            items:[{
-                xtype:'button',
-                ui:'back',
-                text:'Back',
-                id:'back_inb'
-            }]
+            title:'Notifications'
         },{
-            xtype:'toolbar',
-            docked:'bottom',
-            defaults:{
-                iconMask:true,
-                ui:'plain'
-            },
-            layout:{
-            pack:'center',
-                align:'center'
-            },
-            items:[{
-                iconCls:'add',
-                id:'menu_list'
-            },{
-                iconCls:'action',
-                id:'inbox_list'
-            },{
-                iconCls:'arrow_up',
-                id:'up_list'
-            },{
-                iconCls:'arrow_down',
-                id:'down_list'
-            },{
-                iconCls:'delete',
-                id:'logout_list'
-            }]
+            xclass:'mUserStories.view.vcToolbar'
         },{
             xtype:'formpanel',
             title:'Compose',
@@ -67,7 +36,7 @@ Ext.define('mUserStories.view.notificationInbox',{
                 items:[{
                     xtype:'selectfield',
                     label:'Type',
-                    id:'type_inb',
+                    id:'type_vcinb',
                     flex:2,
                     required:true,
                     options:[{
@@ -76,12 +45,6 @@ Ext.define('mUserStories.view.notificationInbox',{
                     },{
                         text:'Emergency',
                         value:'emergency'
-                    },{
-                        text:'Illness',
-                        value:'illness'
-                    },{
-                        text:'Transfer',
-                        value:'transfer'
                     },{
                         text:'Other',
                         value:'otherreport'
@@ -112,7 +75,7 @@ Ext.define('mUserStories.view.notificationInbox',{
                 ui:'round',
                 grouped:true,
                 pinHeaders:false,
-                id:'inbox_unread',
+                id:'vcinbox_unread',
                 width:Ext.os.deviceType=='Phone'?null:'80%',
                 height:Ext.os.deviceType=='Phone'?null:'100%',
                 centered:true,
@@ -127,7 +90,7 @@ Ext.define('mUserStories.view.notificationInbox',{
                 ui:'round',
                 grouped:true,
                 pinHeaders:false,
-                id:'inbox_all',
+                id:'vcinbox_all',
                 width:Ext.os.deviceType=='Phone'?null:'80%',
                 height:Ext.os.deviceType=='Phone'?null:'100%',
                 centered:true,

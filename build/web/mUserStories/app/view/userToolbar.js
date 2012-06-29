@@ -38,6 +38,9 @@ Ext.define('mUserStories.view.userToolbar',{
             iconCls:'arrow_down',
             id:'downButton'
         },{
+            iconCls:'star',
+            id:'resourcesButton'
+        },{
             iconCls:'delete',
             id:'logoutButton'
         }]

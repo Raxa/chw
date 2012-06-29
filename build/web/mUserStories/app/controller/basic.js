@@ -17,7 +17,7 @@
 Ext.define('mUserStories.controller.basic',{
     extend:'Ext.app.Controller',
     controllers:['basic'],
-    views:['loginScreen','confirmLocation','patientList','patientDetails'],
+    views:['loginScreen','confirmLocation','patientList','patientDetails','vcNotifications','vcScheduling'],
     config:{
         refs:{
             cancel_loc:'#cancel_loc',
@@ -26,14 +26,20 @@ Ext.define('mUserStories.controller.basic',{
             cancel_rem:'#cancel_rem',
             back_add:'#back_add',
             back_det:'#back_det',
+            back_inb:'#back_inb',
+            back_res:'#back_res',
             downButton:'#downButton',
             inboxButton:'#inboxButton',
             logoutButton:'#logoutButton',
+            logoutButton_vc:'#logoutButton_vc',
             menuButton:'#menuButton',
+            notButton:'#notButton',
             ok_loc:'#ok_loc',
             ok_login:'#ok_login',
             ok_reg:"#ok_reg",
             ok_rem:'#ok_rem',
+            resourcesButton:'#resourcesButton',
+            schButton:'#schButton',
             upButton:'#upButton'
         },
         control:{
@@ -42,6 +48,14 @@ Ext.define('mUserStories.controller.basic',{
                     this.doBack()
                 }
             },back_det:{
+                tap:function(){
+                    this.doBack()
+                }
+            },back_inb:{
+                tap:function(){
+                    this.doBack()
+                }
+            },back_res:{
                 tap:function(){
                     this.doBack()
                 }
@@ -73,9 +87,17 @@ Ext.define('mUserStories.controller.basic',{
                 tap:function(){
                     this.doExit()
                 }
+            },logoutButton_vc:{
+                tap:function(){
+                    this.doExit()
+                }
             },menuButton:{
                 tap:function(){
                     this.doToolbar('menu')
+                }
+            },notButton:{
+                tap:function(){
+                    this.doToolbar('not')
                 }
             },ok_loc:{
                 tap:function(){
@@ -93,7 +115,16 @@ Ext.define('mUserStories.controller.basic',{
                 tap:function(){
                     this.doAdd('reminder',true)
                 }
-            },upButton:{
+            },resourcesButton:{
+                tap:function(){
+                    this.doToolbar('resources')
+                }
+            },schButton:{
+                tap:function(){
+                    this.doToolbar('sch')
+                }
+            },
+            upButton:{
                 tap:function(){
                     this.doToolbar('up')
                 }
@@ -121,7 +152,14 @@ Ext.define('mUserStories.controller.basic',{
                 // display options for adding
                 xclass:'mUserStories.view.addOptions'
             },{
+                // display inbox/outbox
                 xclass:'mUserStories.view.notificationInbox'
+            },{
+                xclass:'mUserStories.view.resources'
+            },{
+                xclass:'mUserStories.view.vcNotifications'
+            },{
+                xclass:'mUserStories.view.vcScheduling'
             }]
         })
     },
@@ -205,12 +243,12 @@ Ext.define('mUserStories.controller.basic',{
     doLogin:function(arg){
         if(arg){
             // store items
-            USER=Ext.getCmp('username').getValue();
+            USER.name=Ext.getCmp('username').getValue();
             var pass=Ext.getCmp('password').getValue();
-            if(USER==''||pass==''){
+            if(USER.name==''||pass==''){
                 Ext.Msg.alert("Error","Please fill in all fields")
             }else{
-                this.saveBasicAuthHeader(USER,pass);
+                this.saveBasicAuthHeader(USER.name,pass);
             }
         }else{
             // exit the program
@@ -237,7 +275,13 @@ Ext.define('mUserStories.controller.basic',{
                 }
             })
         }else if(arg==='inbox'){
-            Ext.getCmp('viewPort').setActiveItem(PAGES.INBOX)
+            Ext.getCmp('viewPort').setActiveItem(PAGES.INBOX_CHW)
+        }else if(arg==='resources'){
+            Ext.getCmp('viewPort').setActiveItem(PAGES.RESOURCES)
+        }else if(arg==='not'){
+            Ext.getCmp('viewPort').setActiveItem(PAGES.INBOX_VC)
+        }else if(arg==='sch'){
+            Ext.getCmp('viewPort').setActiveItem(PAGES.SCHEDULING)
         }
     },
 /* HELPER FUNCTIONS */  

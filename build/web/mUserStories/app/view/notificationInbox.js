@@ -21,7 +21,13 @@ Ext.define('mUserStories.view.notificationInbox',{
         items:[{
             xtype:'titlebar',
             docked:'top',
-            title:'Notifications'
+            title:'Notifications',
+            items:[{
+                xtype:'button',
+                ui:'back',
+                text:'Back',
+                id:'back_inb'
+            }]
         },{
             xtype:'toolbar',
             docked:'bottom',
@@ -48,6 +54,55 @@ Ext.define('mUserStories.view.notificationInbox',{
             },{
                 iconCls:'delete',
                 id:'logout_list'
+            }]
+        },{
+            xtype:'formpanel',
+            title:'Compose',
+            items:[{
+                xtype:'fieldset',
+                title:'Basic Information',
+                defaults:{
+                    labelWidth:'35%'
+                },
+                items:[{
+                    xtype:'selectfield',
+                    label:'Type',
+                    id:'type_inb',
+                    flex:2,
+                    required:true,
+                    options:[{
+                        text:'',
+                        value:'empty'
+                    },{
+                        text:'Emergency',
+                        value:'emergency'
+                    },{
+                        text:'Illness',
+                        value:'illness'
+                    },{
+                        text:'Transfer',
+                        value:'transfer'
+                    },{
+                        text:'Other',
+                        value:'otherreport'
+                    }]
+                },{
+                    xtype:'textfield',
+                    label:'First',
+                    id:'first_rep',
+                    required:true
+                },{
+                    xtype:'textfield',
+                    label:'Last',
+                    id:'last_rep',
+                    required:true
+                },{
+                    // TODO: Generate necessary fields dynamically
+                    xtype:'textfield',
+                    label:'Details',
+                    id:'details_rep',
+                    labelAlign:'top'
+                }]
             }]
         },{
             title:'Unread',

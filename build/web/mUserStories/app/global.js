@@ -22,15 +22,19 @@ var PAGES={
     PATIENT_LIST:2,
     PATIENT_DET:3,
     ADD:4,
-    INBOX:5
+    INBOX_CHW:5,
+    RESOURCES:6,
+    INBOX_VC:7,
+    SCHEDULING:8
 };
-var USER="";
+var USER=new Object();
+USER.name='';
+USER.type='CHW';
 var CURR_DATE=new Date();
 var LOCATION="";
 var CONNECTED=false;
 var helper = {
-    listDisclose: function (record) {
-        
+    listDisclose: function (record) { 
         Ext.getCmp('title_det').setTitle(record.get('familyName')+', '+record.get('givenName'))
         // navigate to details for specific patient and populate fields
         Ext.getCmp('first_det').setValue(record.get('givenName'));
@@ -42,12 +46,15 @@ var helper = {
         Ext.getCmp('viewPort').setActiveItem(PAGES.PATIENT_DET)
     },
     loginContinue:function(){
-        // continue to next page with proper settings
-        Ext.getCmp('welcome_label').setHtml("Welcome, "+USER+"<br>"+"This is your check in for "+CURR_DATE)
         // clear form fields
         Ext.getCmp('username').reset();
         Ext.getCmp('password').reset();
-        // continue to next page
-        Ext.getCmp('viewPort').setActiveItem(PAGES.CONFIRM_LOC)
+        if(USER.type==='CHW'){
+            // continue to next page with proper settings
+            Ext.getCmp('welcome_label').setHtml("Welcome, "+USER.name+"<br>"+"This is your check in for "+CURR_DATE)
+            Ext.getCmp('viewPort').setActiveItem(PAGES.CONFIRM_LOC)
+        }else if(USER.type==='VC'){
+            Ext.getCmp('viewPort').setActiveItem(PAGES.INBOX_VC)
+        }
     }
 }
