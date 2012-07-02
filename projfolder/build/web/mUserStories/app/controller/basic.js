@@ -137,9 +137,6 @@ Ext.define('mUserStories.controller.basic',{
             fullscreen:true,
             layout:'card',
             items:[{
-                // display details of patient
-                xclass:'mUserStories.view.patientDetails'
-            },{
                 // log into application
                 xclass:'mUserStories.view.loginScreen'
             },{
@@ -148,6 +145,9 @@ Ext.define('mUserStories.controller.basic',{
             },{
                 // display a list of patients
                 xclass:'mUserStories.view.patientList'
+            },{
+                // display details of patient
+                xclass:'mUserStories.view.patientDetails'
             },{
                 // display options for adding
                 xclass:'mUserStories.view.addOptions'
