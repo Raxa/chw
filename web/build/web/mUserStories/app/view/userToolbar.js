@@ -29,13 +29,16 @@ Ext.define('mUserStories.view.userToolbar',{
             iconCls:'add',
             id:'menuButton'
         },{
-            iconCls:'inbox2',
+            //iconCls:'inbox2',
+            iconCls:'action',
             id:'inboxButton'
         },{
-            iconCls:'cloud_download',
+            iconCls:'arrow_down',
+            // iconCls:'cloud_download',
             id:'downButton'
         },{
-            iconCls:'photos2',
+            // iconCls:'photos2',
+            iconCls:'star',
             id:'resourcesButton'
         },{
             iconCls:'delete',

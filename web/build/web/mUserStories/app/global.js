@@ -22,10 +22,14 @@ var PAGES={
     PATIENT_LIST:2,
     PATIENT_DET:3,
     ADD:4,
-    INBOX_CHW:5,
-    RESOURCES:6,
-    INBOX_VC:7,
-    SCHEDULING:8
+    ADD_REG:5,
+    ADD_REM:6,
+    ADD_APP:7,
+    OPTIONS:8,
+    INBOX_CHW:9,
+    RESOURCES:10,
+    INBOX_VC:11,
+    SCHEDULING:12
 };
 var USER=new Object();
 USER.name='';

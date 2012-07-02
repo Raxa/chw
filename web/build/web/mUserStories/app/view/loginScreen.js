@@ -67,11 +67,6 @@ Ext.define('mUserStories.view.loginScreen',{
                         xtype: 'label',
                         flex: '2'
                     },{
-                        xtype:'button',
-                        iconCls:'delete',
-                        iconMask:true,
-                        ui:'confirm-round'
-                    },{
                         xtype: 'button',
                         // text: 'Okay',
                         id: 'ok_login',
